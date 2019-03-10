@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sre on xianyuLuo Blog</title>
-    <link>xianyuluo.com/tags/sre.html</link>
+    <link>http://xianyuLuo.github.io/tags/sre.html</link>
     <description>Recent content in Sre on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
     <lastBuildDate>Sun, 10 Mar 2019 12:11:03 +0800</lastBuildDate>
     
-	<atom:link href="xianyuluo.com/tags/sre/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xianyuLuo.github.io/tags/sre/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SRE附录C~事故状态文档示范</title>
-      <link>xianyuluo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html</link>
+      <link>http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html</link>
       <pubDate>Sun, 10 Mar 2019 12:11:03 +0800</pubDate>
       
-      <guid>xianyuluo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html</guid>
+      <guid>http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html</guid>
       <description>莎士比亚搜索服务 新韵文+过载事故：2015-10-21 （沟通负责人会随时更新事故概要）
 摘要 莎士比亚搜索服务由于新发现的韵文不在索引中而处于连锁故障状态
 状态 活跃，事故编号 ##45
@@ -33,10 +33,10 @@
     
     <item>
       <title>SRE附录D~事后总结示范</title>
-      <link>xianyuluo.com/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html</link>
+      <link>http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html</link>
       <pubDate>Sun, 10 Mar 2019 12:10:18 +0800</pubDate>
       
-      <guid>xianyuluo.com/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html</guid>
+      <guid>http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html</guid>
       <description>莎士比亚新询文事故总结（事故编号 #465） 日期 2015-10-21
 作者 Jennifer、martym、agoogler
 目前状态 已经终稿，待办事项正在进行中
@@ -51,10 +51,10 @@
     
     <item>
       <title>SRE附录F~生产环境会议记录示范</title>
-      <link>xianyuluo.com/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html</link>
+      <link>http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html</link>
       <pubDate>Sun, 10 Mar 2019 12:09:02 +0800</pubDate>
       
-      <guid>xianyuluo.com/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html</guid>
+      <guid>http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html</guid>
       <description> 日期 2015-10-23
 参与者 agoogler、clarac、docbrown、jennifer和martym
 公告  大型事故（#465），造成错误预算耗尽  之前的待办事项评审  确保山羊传送器可以用于传送牛奶  ——质子加速中的非线性特质可以预知了，应该可以在几天内解决准确性问题

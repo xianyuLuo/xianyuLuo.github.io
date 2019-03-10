@@ -2,102 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on xianyuLuo Blog</title>
-    <link>xianyuluo.com/tags.html</link>
+    <link>http://xianyuLuo.github.io/tags.html</link>
     <description>Recent content in Tags on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
     <lastBuildDate>Wed, 07 Nov 2018 22:42:59 +0800</lastBuildDate>
     
-	<atom:link href="xianyuluo.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xianyuLuo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Https</title>
-      <link>xianyuluo.com/tags/https.html</link>
+      <link>http://xianyuLuo.github.io/tags/https.html</link>
       <pubDate>Wed, 07 Nov 2018 22:42:59 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/https.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/https.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ingress</title>
-      <link>xianyuluo.com/tags/ingress.html</link>
+      <link>http://xianyuLuo.github.io/tags/ingress.html</link>
       <pubDate>Fri, 09 Nov 2018 18:29:30 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/ingress.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/ingress.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ip</title>
-      <link>xianyuluo.com/tags/ip.html</link>
+      <link>http://xianyuLuo.github.io/tags/ip.html</link>
       <pubDate>Wed, 29 Nov 2017 20:41:05 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/ip.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/ip.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernetes</title>
-      <link>xianyuluo.com/tags/kubernetes.html</link>
+      <link>http://xianyuLuo.github.io/tags/kubernetes.html</link>
       <pubDate>Fri, 09 Nov 2018 18:29:30 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/kubernetes.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/kubernetes.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sre</title>
-      <link>xianyuluo.com/tags/sre.html</link>
+      <link>http://xianyuLuo.github.io/tags/sre.html</link>
       <pubDate>Sun, 10 Mar 2019 12:11:03 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/sre.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/sre.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tcp</title>
-      <link>xianyuluo.com/tags/tcp.html</link>
+      <link>http://xianyuLuo.github.io/tags/tcp.html</link>
       <pubDate>Wed, 29 Nov 2017 20:41:05 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/tcp.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/tcp.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>Traefik</title>
-      <link>xianyuluo.com/tags/traefik.html</link>
+      <link>http://xianyuLuo.github.io/tags/traefik.html</link>
       <pubDate>Mon, 10 Sep 2018 22:08:46 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/traefik.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/traefik.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vpn</title>
-      <link>xianyuluo.com/tags/vpn.html</link>
+      <link>http://xianyuLuo.github.io/tags/vpn.html</link>
       <pubDate>Mon, 23 Oct 2017 21:35:00 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/vpn.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/vpn.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>操作系统</title>
-      <link>xianyuluo.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html</link>
+      <link>http://xianyuLuo.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html</link>
       <pubDate>Sat, 19 Nov 2016 23:46:50 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>网络</title>
-      <link>xianyuluo.com/tags/%E7%BD%91%E7%BB%9C.html</link>
+      <link>http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C.html</link>
       <pubDate>Mon, 23 Oct 2017 21:35:00 +0800</pubDate>
       
-      <guid>xianyuluo.com/tags/%E7%BD%91%E7%BB%9C.html</guid>
+      <guid>http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C.html</guid>
       <description></description>
     </item>
     

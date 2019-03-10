@@ -16,13 +16,13 @@
     <meta name="description" content="Sre">
         
     <meta name="author" content="xianyuLuo">
-    <meta property="og:url" content="xianyuluo.com/tags/sre.html">
+    <meta property="og:url" content="http://xianyuLuo.github.io/tags/sre.html">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="/xianyuluo.com/css/normalize.css">
+    <link rel="stylesheet" href="/css/normalize.css">
     
-    <link rel="stylesheet" href="/xianyuluo.com/css/style.css">
-    <link rel="alternate" type="application/rss+xml+xml" href="xianyuluo.com/tags/sre/index.xml" title="xianyuLuo Blog" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml+xml" href="http://xianyuLuo.github.io/tags/sre/index.xml" title="xianyuLuo Blog" />
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     
@@ -39,15 +39,19 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="xianyuluo.com/xianyuluo.com">
+                    <a id="logo" href="http://xianyuLuo.github.io">
                         xianyuLuo Blog
                     </a>
                 
-                <p class="description">专注于运维开发、SRE、python</p>
+                <p class="description">当你的才华还不能支撑起你的野心时，你应该静下心来，好好学习！</p>
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="xianyuluo.com/xianyuluo.com">首页</a>
+                    <a class="" href="http://xianyuLuo.github.io">首页</a>
+                    
+                    <a  href="http://xianyuLuo.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://xianyuLuo.github.io/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -74,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html">SRE附录C~事故状态文档示范</a>
+                                    <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html">SRE附录C~事故状态文档示范</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -94,14 +98,14 @@
 ——MapReduce索引任务完成，等待Bigdata复制到所有集群
  2015-10-21 15:10 UTC martym  ——向Shakespeare corpus中增加新的韵文，同时启动MapReduce任务
  2015-10-21 15:04 UTC martym  ——从Shakespeare-discuss@ 邮件列表中获得了新发现的韵文全文……
-                                <p class="readmore"><a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html">阅读全文</a></p>
+                                <p class="readmore"><a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html">SRE附录D~事后总结示范</a>
+                                    <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html">SRE附录D~事后总结示范</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -119,14 +123,14 @@
 解决方案 将流量导向泄洪集群，同时增加了10倍容量，以应对连锁故障。部署了更新过的索引，绕过了潜在的Bug，在公共对新韵文的兴趣消退之前，保持额外的容量。资源泄露的问题已经被找到，并且修复已经上线
 检测 我检测到大量的 HTTP 500的情况，向on-call发送了紧急报警
 代办事项    待办事项 类型 负责人                     经验教训 做的好的地方  监控系统在大量错误的情况下快速发出了告警 在所有集群中快速更新的 Shakespeare Corpus  做的不好的地方  对连锁故障的处理不够熟练 由于这次大幅度的流量增长，几乎全部请求都失败了，导致我们超过了可用性与错误预算数个数量级。  幸运的因素  莎士比亚迷的邮件列表里刚好有一份新的韵文文本 服务日志中包括了指出文件描述符耗尽问题导致崩溃的栈跟踪 致死请求通过推送新的索引关键词就解决了  时间线 2015-10-21（所有时区都是UTC） + 14:51 新闻报道新的莎士比亚韵文在一辆Delorean车的杂物箱中发现 + 14:54 事故开始，搜索后端在高负载的情况下崩溃 + …… + 15:01 应急故障管理开始 + …… + 15:36 故障缓解 + …… + 16:00 故障结束……
-                                <p class="readmore"><a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html">阅读全文</a></p>
+                                <p class="readmore"><a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html">SRE附录F~生产环境会议记录示范</a>
+                                    <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html">SRE附录F~生产环境会议记录示范</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -144,7 +148,7 @@
  AnnotataionConsistencyTooEventual：本周告警5次，可能是由于bigtabale跨区域的复制延迟导致  —— 调查仍在进行，见bug 4898200
 —— 最近不会有修复，会提高阈值以减少无效告警的次数
 非紧急告警回顾  没有  监控系统修改/静音  AnnotataionConsistencyTooEventual，可以接受的延迟阈值从60s提高到180s  资源  处于新韵文事故时借用了一些资源，会在下周下线多余的容量以退还容量 目前的利用率是 CPU 60%、RAM 75%、DISK 44%  关键服务指标  OK 99 百分比延迟：88ms &lt; 100ms SLO目标（过去30天） BAD 可用性：86.95% &lt; 99.99 SLO目标 （过去30天）  讨论/项目更新  项目Molere下两周发布  新的代办事项  TODO （martym）：提高AnnotataionConsistencyTooEventual的阈值 TODO（docbrown）：将实例数量复原，退还资源  ……
-                                <p class="readmore"><a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html">阅读全文</a></p>
+                                <p class="readmore"><a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -162,7 +166,7 @@
         <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="xianyuluo.com">
+      <input type="hidden" name="sitesearch" value="http://xianyuLuo.github.io">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -172,43 +176,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="xianyuluo.com/post/first.html" title="First">First</a>
+        <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html" title="SRE附录C~事故状态文档示范">SRE附录C~事故状态文档示范</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html" title="SRE附录C~事故状态文档示范">SRE附录C~事故状态文档示范</a>
+        <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html" title="SRE附录D~事后总结示范">SRE附录D~事后总结示范</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html" title="SRE附录D~事后总结示范">SRE附录D~事后总结示范</a>
+        <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html" title="SRE附录F~生产环境会议记录示范">SRE附录F~生产环境会议记录示范</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html" title="SRE附录F~生产环境会议记录示范">SRE附录F~生产环境会议记录示范</a>
+        <a href="http://xianyuLuo.github.io/post/ingress%E4%BB%8B%E7%BB%8D.html" title=""></a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/ingress%E4%BB%8B%E7%BB%8D.html" title=""></a>
+        <a href="http://xianyuLuo.github.io/post/%E4%BD%BF%E7%94%A8let-s-encript%E7%94%B3%E8%AF%B7%E9%80%9A%E9%85%8D%E7%AC%A6%E8%AF%81%E4%B9%A6.html" title="使用let&#39;s encript申请通配符证书">使用let&#39;s encript申请通配符证书</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/%E4%BD%BF%E7%94%A8let-s-encript%E7%94%B3%E8%AF%B7%E9%80%9A%E9%85%8D%E7%AC%A6%E8%AF%81%E4%B9%A6.html" title="使用let&#39;s encript申请通配符证书">使用let&#39;s encript申请通配符证书</a>
+        <a href="http://xianyuLuo.github.io/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html" title="traefik在kubernetes中的应用">traefik在kubernetes中的应用</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html" title="traefik在kubernetes中的应用">traefik在kubernetes中的应用</a>
+        <a href="http://xianyuLuo.github.io/post/tcp%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E5%92%8C%E5%9D%97%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.html" title="tcp交互数据和块数据处理">tcp交互数据和块数据处理</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/tcp%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E5%92%8C%E5%9D%97%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.html" title="tcp交互数据和块数据处理">tcp交互数据和块数据处理</a>
+        <a href="http://xianyuLuo.github.io/post/tcp%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2.html" title="tcp连接的建立与终止">tcp连接的建立与终止</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/tcp%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2.html" title="tcp连接的建立与终止">tcp连接的建立与终止</a>
+        <a href="http://xianyuLuo.github.io/post/cow.html" title="使用COW让浏览器正确上网">使用COW让浏览器正确上网</a>
     </li>
     
     <li>
-        <a href="xianyuluo.com/post/cow.html" title="使用COW让浏览器正确上网">使用COW让浏览器正确上网</a>
+        <a href="http://xianyuLuo.github.io/post/%E4%BD%BF%E7%94%A8ansible%E6%8C%82%E7%9B%98.html" title="使用ansible挂盘">使用ansible挂盘</a>
     </li>
     
 </ul>
@@ -221,11 +225,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="/categories/kubernetes/">kubernetes(1)</a>
+        <a href="http://xianyuLuo.github.io/categories/kubernetes/">kubernetes(1)</a>
     </li>
     
     <li>
-        <a href="/categories/%E7%BD%91%E7%BB%9C/">网络(10)</a>
+        <a href="http://xianyuLuo.github.io/categories/%E7%BD%91%E7%BB%9C/">网络(10)</a>
     </li>
     
 </ul>
@@ -235,25 +239,25 @@
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
-    <a href="/tags/https/">https</a>
+    <a href="http://xianyuLuo.github.io/tags/https/">https</a>
     
-    <a href="/tags/ingress/">ingress</a>
+    <a href="http://xianyuLuo.github.io/tags/ingress/">ingress</a>
     
-    <a href="/tags/ip/">ip</a>
+    <a href="http://xianyuLuo.github.io/tags/ip/">ip</a>
     
-    <a href="/tags/kubernetes/">kubernetes</a>
+    <a href="http://xianyuLuo.github.io/tags/kubernetes/">kubernetes</a>
     
-    <a href="/tags/sre/">sre</a>
+    <a href="http://xianyuLuo.github.io/tags/sre/">sre</a>
     
-    <a href="/tags/tcp/">tcp</a>
+    <a href="http://xianyuLuo.github.io/tags/tcp/">tcp</a>
     
-    <a href="/tags/traefik/">traefik</a>
+    <a href="http://xianyuLuo.github.io/tags/traefik/">traefik</a>
     
-    <a href="/tags/vpn/">vpn</a>
+    <a href="http://xianyuLuo.github.io/tags/vpn/">vpn</a>
     
-    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    <a href="http://xianyuLuo.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
     
-    <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    <a href="http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
 </div>
     </section>
@@ -263,7 +267,7 @@
     <section class="widget">
         <h3 class="widget-title">其它</h3>
         <ul class="widget-list">
-            <li><a href="xianyuluo.com/index.xml">文章 RSS</a></li>
+            <li><a href="http://xianyuLuo.github.io/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
@@ -272,7 +276,7 @@
 </div>
 <footer id="footer">
     <div class="container">
-        &copy; 2018 <a href="xianyuluo.com/xianyuluo.com">xianyuLuo Blog By xianyuLuo</a>.
+        &copy; 2018 <a href="http://xianyuLuo.github.io">xianyuLuo Blog By xianyuLuo</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
         <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
         
@@ -281,7 +285,7 @@
 
 
 <a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/xianyuluo.com/js/totop.js?v=0.0.0" async=""></script>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
 
 
 
