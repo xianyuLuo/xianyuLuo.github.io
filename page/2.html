@@ -94,7 +94,7 @@
 好，到这儿应该对OSI各层的作用和所使用的的协议有大概的了解了吧！
 技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/osi%E4%B8%83%E5%B1%82%E5%8D%8F%E8%AE%AE%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3.html">阅读全文</a></p>
                         </article>
@@ -121,7 +121,7 @@
 TCP：传输控制协议IP：数据报协议 TCP/IP：TCP/IP为很大的一个协议族，里面包含了非常多的协议。如：TCP、IP、UDP、ARP、ICMP、RARP、IGMP&hellip;&hellip;
 他们的对应关系如下图所示： 技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/osi-iso%E4%B8%83%E5%B1%82.html">阅读全文</a></p>
                         </article>
@@ -156,7 +156,7 @@ IP路由选择 当一个IP数据包准备好了的时候，IP数据包（或者�
 如果IP数据包的TTL（生命周期）以到，则该IP数据包就被抛弃。 1、搜索路由表，优先搜索匹配主机，如果能找到和IP地址完全一致的目标主机，则将该包发向目标主机 2、搜索路由表，如果匹配主机失败，则匹配同子网的路由器，这需要“子网掩码(1.3.)”的协助。如果找到路由器，则将该包发向路由器。 3、搜索路由表，如果匹配同子网路由器失败，则匹配同网号（第一章有讲解）路由器，如果找到路由器，则将该包发向路由器。 4、搜索陆游表，如果以上都失败了，就搜索默认路由，如果默认路由存在，则发包 5、如果都失败了，就丢掉这个包。 这再一次证明了，ip包是不可靠的。因为它不保证送达。
 技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/ip%E5%8D%8F%E8%AE%AE.html">阅读全文</a></p>
                         </article>
@@ -182,7 +182,7 @@ IP路由选择 当一个IP数据包准备好了的时候，IP数据包（或者�
                                 什么是ICMP？ ICMP是（Internet Control Message Protocol）Internet控制报文协议。  ICMP协议有什么用？ 它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用、端口是否可达等网络本身的消息。  这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。也就是说每次在传输IP数据包之前，都会利用ICMP去检测一番，然后再决定是否传输IP数据包。  ICMP协议类型 其中有 0：回显应答 8：回显请求 Ping命令就是利用这两种类型的ICMP数据包。 一台主机向一个节点发送一个Type=8的ICMP报文，如果途中没有异常（例如被路由器丢弃、目标不回应ICMP或传输失败），则目标返回Type=0的ICMP报文，说明这台主机存在，更详细的traceroute通过计算ICMP报文通过的节点来确定主机与目标之间的网络距离。 （在上一篇中说道Tracroute利用了TTL，同时traceroute也利用了ICMP）
 技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/icmp%E5%8D%8F%E8%AE%AE.html">阅读全文</a></p>
                         </article>
@@ -210,7 +210,7 @@ IP路由选择 当一个IP数据包准备好了的时候，IP数据包（或者�
 Traceroute程序发送一份UDP数据报给目的主机，但它选择一个不可能的值作为UDP端口号（大于30000），使目的主机的任何一个应用程序都不可能使用该端口。因为，当该数据报到达时，将使目的主机的UDP模块产生一份“端口不可达”错误的ICMP报文。这样，Traceroute程序所要做的就是区分接收到的ICMP报文是超时还是端口不可达，以判断什么时候结束。  看到这儿，是不是觉得Traceroute有点老奸巨猾呢？没错，就是的！
 技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/ttl.html">阅读全文</a></p>
                         </article>
@@ -239,7 +239,7 @@ ARP协议的工作过程
 arp缓存表例子
 windows下执行&rdquo;arp -a&rdquo;命令： linux下执行&rdquo;arp -a&rdquo;命令： 技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/arp%E5%8D%8F%E8%AE%AE.html">阅读全文</a></p>
                         </article>
@@ -266,7 +266,7 @@ windows下执行&rdquo;arp -a&rdquo;命令： linux下执行&rdquo;arp -a&rdquo;
 递归解析： 递归解析就相当于你把这件事情交给第三个人去做，不管他怎么做，反正最后把域名对应的IP地址交给你就是了。而这第三个人就是DNS服务器，这也是我们生活中用的比较多的一种方法。一般用的就是电信的 114.114.114.114  迭代解析： 迭代解析就是你自己去找。 全球的根域名服务器一共有13台，你自己去一级一级的找下去，最终找到自己想解析的域名。  例子： 解析 www.google.com.（正规来说这后面是还有一个点的，只是一般都省略了）这个域名；我的DNS服务器是电信的114.114.114.114 解析步骤： 1、我自己的电脑去访问www.google.com的时候，就问114 “你帮我找找www.google.com服务器的IP地址” 2、然后114就去找到13台根服务器中的一台根服务器，问“你知道www.google.com的IP地址嘛?”，然后根服务器就说：“不知道，但是我知道.com的服务器IP，要不你去问问它？” 3、接着114就找到.com的服务器问：“你知道www.google.com的IP嘛？”，然后.com服务器就说：“我不知道，但是我知道google.com的服务器IP，要不你去问问它？” 4、再接着114就找到google.com的服务器问：“你知道www.google.com的IP嘛？”，然后google.com服务器就回答道“知道呀”，然后把IP地址告诉114 5、历经千辛万苦终于找到了，114就会暂时把这个地址缓存一段时间，当有人再来问它的时候，它就不用那么辛苦去找了，直接从缓存里面调出来就是了 6、最后114就把www.google.com的IP地址告诉我了，然后我就去向那个IP地址请求资源去了
 总结： 我去问114，让它给我www.google.com的服务器地址，这样的方法就叫做递归，或者也可以叫做转发吧！ 114去找根服务器，一台台挨着问的这个过程就叫做迭代！  技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/dns%E8%A7%A3%E6%9E%90.html">阅读全文</a></p>
                         </article>
@@ -287,7 +287,7 @@ windows下执行&rdquo;arp -a&rdquo;命令： linux下执行&rdquo;arp -a&rdquo;
 Buffer：主要是用于解决速度不同的设备之间的传输问题。一般会用在磁盘之间；比如一个USB2.0的磁盘要拷贝文件到一个USB3.0的磁盘，很明显3.0的速度要远比2.0的快得多，如果3.0的一直去读取2.0的数据的话，那这样就会浪费它的速度优势；所以可以先把存储速度慢的数据先放到Buffer里面，当达到一定程度时，存储速度快的就从Buffer里面将数据取出来；这样便可以大大的提高利用率。  所以说Buffer是位于存储速度不同步的设备之间的一个缓冲区。
 技术交流可加QQ群：774332965
 
-微信订阅号同步：IT运维那点儿事……
+微信订阅号同步：时下IT……
                             </div>
                             <p class="readmore"><a href="http://xianyuLuo.com/post/cache-buffer.html">阅读全文</a></p>
                         </article>
