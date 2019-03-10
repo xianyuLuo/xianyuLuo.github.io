@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="cn-ZH">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.54.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>网络 | xianyuLuo Blog</title>
+    <meta property="og:title" content="网络 - xianyuLuo Blog">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="网络">
+        
+    <meta name="author" content="">
+    <meta property="og:url" content="http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml+xml" href="http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C/index.xml" title="xianyuLuo Blog" />
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://xianyuLuo.github.io">
+                        xianyuLuo Blog
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://xianyuLuo.github.io">首页</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    
+                    <h3 class="archive-title">
+                        包含标签
+                        <span class="keyword">网络</span>
+                        的文章
+                    </h3>
+                    
+
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://xianyuLuo.github.io/post/cow.html">使用COW让浏览器正确上网</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2017年10月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="http://xianyuLuo.github.io/categories/%E7%BD%91%E7%BB%9C">网络</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                概述 防火长城（英文名称Great Firewall of China，简写为Great Firewall，缩写GFW），也称中国防火墙或中国国家防火墙，指中华人民共和国政府在其管辖因特网内部建立的多套网络审查系统的总称，包括相关行政审查系统。 当使用浏览器访问google、facebook、youtube这些网站时都被GFW拦于门外，但是有些站点又是可以访问的，比如github.com；这就造成一个问题，我怎么知道那些网站是可以访问，哪些不能访问的站点又该怎么办呢？ COW 介绍 COW 是一个简化穿墙的 HTTP 代理服务器。COW 的设计目标是自动化，理想情况下用户无需关心哪些网站无法访问，可直连网站也不会因为使用二级代理而降低访问速度。 简单来说就是国内能访问的就直接访问，不能访问的就走代理访问。
+COW优点  自动检测网站是否被墙，仅对被墙网站使用二级代理 自动生成包含直连网站的PAC文件，访问这些网站时可不使用COW  COW缺点  仅支持浏览器使用  架构图  客户端和一台内网服务器建立连接 内网服务器和一台香港服务器建立连接 当客户端访问国内网站时，就直接走内网服务器代理；当客户端访问国外网站时，就先走内网服务器，然后再通过内网服务器和香港服务器之间的SOCK链接访问。  服务部署步骤 香港服务器(6.6.6.6) 1、下载COW二进制文件
+$ curl -L git.io/cow | bash  此时会在当前目录下生成一个 cow 二进制文件，和 .cow/ 目录。cow 为启动程序，.cow/ 里面是配置文件。
+2、修改配置文件
+$ vim .cow/rc listen = cow://aes-128-cfb:xxx:5555 logFile = /var/log/cow.log  只需要有这两行配置就OK了。listen行的xxx是内网服务器和相关服务器通信的密码,aes-128-cfb是加密方式。详细的可以参考cow配置文件里面的中文解释。
+3、启动
+./cow &amp;  此时会在该服务器上监听5555端口，等待内网服务器去连接。
+内网服务器(192.168.1.11) 1、下载COW二进制文件
+$ curl -L git.……
+                                <p class="readmore"><a href="http://xianyuLuo.github.io/post/cow.html">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+
+                    
+
+
+
+
+                </div>
+            </div>
+
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://xianyuLuo.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html" title="SRE附录C~事故状态文档示范">SRE附录C~事故状态文档示范</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html" title="SRE附录D~事后总结示范">SRE附录D~事后总结示范</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html" title="SRE附录F~生产环境会议记录示范">SRE附录F~生产环境会议记录示范</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/ingress%E4%BB%8B%E7%BB%8D.html" title=""></a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/%E4%BD%BF%E7%94%A8let-s-encript%E7%94%B3%E8%AF%B7%E9%80%9A%E9%85%8D%E7%AC%A6%E8%AF%81%E4%B9%A6.html" title="使用let&#39;s encript申请通配符证书">使用let&#39;s encript申请通配符证书</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html" title="traefik在kubernetes中的应用">traefik在kubernetes中的应用</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/tcp%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E5%92%8C%E5%9D%97%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.html" title="tcp交互数据和块数据处理">tcp交互数据和块数据处理</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/tcp%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2.html" title="tcp连接的建立与终止">tcp连接的建立与终止</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/cow.html" title="使用COW让浏览器正确上网">使用COW让浏览器正确上网</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/post/%E4%BD%BF%E7%94%A8ansible%E6%8C%82%E7%9B%98.html" title="使用ansible挂盘">使用ansible挂盘</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/categories/kubernetes/">kubernetes(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.github.io/categories/%E7%BD%91%E7%BB%9C/">网络(10)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://xianyuLuo.github.io/tags/https/">https</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/ingress/">ingress</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/ip/">ip</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/kubernetes/">kubernetes</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/sre/">sre</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/tcp/">tcp</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/traefik/">traefik</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/vpn/">vpn</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://xianyuLuo.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2018 <a href="http://xianyuLuo.github.io">xianyuLuo Blog By </a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+
+</body>
+</html>
