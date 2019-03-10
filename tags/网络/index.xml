@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>网络 on xianyuLuo Blog</title>
-    <link>http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C.html</link>
+    <link>http://xianyuLuo.com/tags/%E7%BD%91%E7%BB%9C.html</link>
     <description>Recent content in 网络 on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
     <lastBuildDate>Mon, 23 Oct 2017 21:35:00 +0800</lastBuildDate>
     
-	<atom:link href="http://xianyuLuo.github.io/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xianyuLuo.com/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用COW让浏览器正确上网</title>
-      <link>http://xianyuLuo.github.io/post/cow.html</link>
+      <link>http://xianyuLuo.com/post/cow.html</link>
       <pubDate>Mon, 23 Oct 2017 21:35:00 +0800</pubDate>
       
-      <guid>http://xianyuLuo.github.io/post/cow.html</guid>
+      <guid>http://xianyuLuo.com/post/cow.html</guid>
       <description>概述 防火长城（英文名称Great Firewall of China，简写为Great Firewall，缩写GFW），也称中国防火墙或中国国家防火墙，指中华人民共和国政府在其管辖因特网内部建立的多套网络审查系统的总称，包括相关行政审查系统。 当使用浏览器访问google、facebook、youtube这些网站时都被GFW拦于门外，但是有些站点又是可以访问的，比如github.com；这就造成一个问题，我怎么知道那些网站是可以访问，哪些不能访问的站点又该怎么办呢？ COW 介绍 COW 是一个简化穿墙的 HTTP 代理服务器。COW 的设计目标是自动化，理想情况下用户无需关心哪些网站无法访问，可直连网站也不会因为使用二级代理而降低访问速度。 简单来说就是国内能访问的就直接访问，不能访问的就走代理访问。
 COW优点  自动检测网站是否被墙，仅对被墙网站使用二级代理 自动生成包含直连网站的PAC文件，访问这些网站时可不使用COW  COW缺点  仅支持浏览器使用  架构图  客户端和一台内网服务器建立连接 内网服务器和一台香港服务器建立连接 当客户端访问国内网站时，就直接走内网服务器代理；当客户端访问国外网站时，就先走内网服务器，然后再通过内网服务器和香港服务器之间的SOCK链接访问。  服务部署步骤 香港服务器(6.6.6.6) 1、下载COW二进制文件
 $ curl -L git.io/cow | bash  此时会在当前目录下生成一个 cow 二进制文件，和 .cow/ 目录。cow 为启动程序，.cow/ 里面是配置文件。

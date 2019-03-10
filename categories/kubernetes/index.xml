@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kubernetes on xianyuLuo Blog</title>
-    <link>http://xianyuLuo.github.io/categories/kubernetes.html</link>
+    <link>http://xianyuLuo.com/categories/kubernetes.html</link>
     <description>Recent content in Kubernetes on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
     <lastBuildDate>Fri, 09 Nov 2018 18:29:30 +0800</lastBuildDate>
     
-	<atom:link href="http://xianyuLuo.github.io/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xianyuLuo.com/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>http://xianyuLuo.github.io/post/ingress%E4%BB%8B%E7%BB%8D.html</link>
+      <link>http://xianyuLuo.com/post/ingress%E4%BB%8B%E7%BB%8D.html</link>
       <pubDate>Fri, 09 Nov 2018 18:29:30 +0800</pubDate>
       
-      <guid>http://xianyuLuo.github.io/post/ingress%E4%BB%8B%E7%BB%8D.html</guid>
+      <guid>http://xianyuLuo.com/post/ingress%E4%BB%8B%E7%BB%8D.html</guid>
       <description>&lt;h1 id=&#34;概念&#34;&gt;概念&lt;/h1&gt;
 
 &lt;p&gt;Ingress是kubernetes1.1之后官方提出的一个标准，按照这套标准它有多种实现，比如 nginx-ingress-controller、traefik-ingress-controller、kong-ingress-controller，这3中都是官方推荐的。Ingress的出现解决了Service的短板：只能在tcp层面做负载均衡。而ingress可以方便的做http/https层面的负载均衡。一个是在4层，一个在7层。ingress就是控制客户端从入口连接到k8s集群服务的规则的集合！&lt;/p&gt;
