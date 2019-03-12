@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kubernetes on xianyuLuo Blog</title>
-    <link>http://xianyuLuo.com/tags/kubernetes.html</link>
-    <description>Recent content in Kubernetes on xianyuLuo Blog</description>
+    <title>Prometheus on xianyuLuo Blog</title>
+    <link>http://xianyuLuo.com/tags/prometheus.html</link>
+    <description>Recent content in Prometheus on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
     <lastBuildDate>Tue, 12 Mar 2019 22:11:13 +0800</lastBuildDate>
     
-	<atom:link href="http://xianyuLuo.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xianyuLuo.com/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -26,35 +26,6 @@ k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB 
    Heapster: 由于 cAdvisor 只提供了单机的容器资源占用情况，而 Heapster 则提供了整个集群的资源监控（kubernetes 1.11 之前，hpa都是从heapster获取数据），并支持持久化数据存储到 InfluxDB   Promethues: 提供强大的数据采集、数据存储、数据展示、告警等，天生完美支持kubernetes，CNCF基金会的第二个成员，第一个是Kubernetes。而且Prometheus里面很多思想都来源于Google内部的监控系统Borgmon，可以说是Google的干儿子。   kube-state-metrics在这里作为prometheus的一个exporter来使用，提供deployment、daemonset、cronjob等服务的监控数据，由kubernestes官方提供，与prometheus紧密结合。 更多关于kube-state-metrics的信息：https://github.com/kubernetes/kube-state-metrics  Prometheus优势 Prometheus和kubernetes相亲相爱 Google干儿子，大厂维护，而且最重要的一点是完美支持Kubernetes
 规范定义 Prometheus对于应用层的监控，定义了一个良好的规范，只需要应用提供接口获取日志就可以了
 Prometheus可以在各个层面实现监控，如下  基础设施层：监控各个主机服务器资源(包括Kubernetes的Node和非Kubernetes的Node)，如CPU,内存,网络吞吐和带宽占用,磁盘I/O和磁盘使用等指标。 中间件层：监控独立部署于Kubernetes集群之外的中间件，例如：MySQL、Redis、RabbitMQ、ElasticSearch、Nginx等。 Kubernetes集群：监控Kubernetes集群本身的关键指标 Kubernetes集群上部署的应用：监控部署在Kubernetes集群上的应用  基于以上三点，所以最终选择使用Prometheus来监控Kubernetes集群。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://xianyuLuo.com/post/ingress%E4%BB%8B%E7%BB%8D.html</link>
-      <pubDate>Fri, 09 Nov 2018 18:29:30 +0800</pubDate>
-      
-      <guid>http://xianyuLuo.com/post/ingress%E4%BB%8B%E7%BB%8D.html</guid>
-      <description>&lt;h1 id=&#34;概念&#34;&gt;概念&lt;/h1&gt;
-
-&lt;p&gt;Ingress是kubernetes1.1之后官方提出的一个标准，按照这套标准它有多种实现，比如 nginx-ingress-controller、traefik-ingress-controller、kong-ingress-controller，这3中都是官方推荐的。Ingress的出现解决了Service的短板：只能在tcp层面做负载均衡。而ingress可以方便的做http/https层面的负载均衡。一个是在4层，一个在7层。ingress就是控制客户端从入口连接到k8s集群服务的规则的集合！&lt;/p&gt;
-
-&lt;h3 id=&#34;ingress出现之前-服务暴露是这样的&#34;&gt;ingress出现之前，服务暴露是这样的：&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://dl-blog.laoxianyu.cn/image2018-8-10_14-6-49.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;ingress出现之后-服务暴露是这样的&#34;&gt;ingress出现之后，服务暴露是这样的：&lt;/h3&gt;</description>
-    </item>
-    
-    <item>
-      <title>traefik在kubernetes中的应用</title>
-      <link>http://xianyuLuo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html</link>
-      <pubDate>Mon, 10 Sep 2018 22:08:46 +0800</pubDate>
-      
-      <guid>http://xianyuLuo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html</guid>
-      <description>目的： 通过本篇文章，能够简单了解和掌握Traefik在Kubernetes中的应用
-如果不了解ingress和ingress-controller概念，请先看前一篇文章。http://km.oa.dragonest.com/x/RoFf
-traefik介绍： 开源的微服务网关服务，支持Mesos、Docker、Rancher、Kubernetes等等，也支持直接部署在物理服务器。能够实现负载均衡、HTTPS、自动更新Ingerss配置等等
-traefik部署： traefik-deployment部署 apiVersion: extensions/v1beta1 kind: Deployment metadata: name: traefik-ingress-controller namespace: traefik labels: k8s-app: traefik-ingress-lb spec: replicas: 1 selector: matchLabels: k8s-app: traefik-ingress-lb template: metadata: labels: k8s-app: traefik-ingress-lb name: traefik-ingress-lb spec: nodeSelector: traefik-controller-qa: &amp;quot;yes&amp;quot; serviceAccountName: traefik-ingress-controller terminationGracePeriodSeconds: 60 volumes: - name: ssl secret: secretName: traefik-cert - name: config configMap: name: traefik-conf containers: - image: traefik name: traefik-ingress-lb volumeMounts: - mountPath: &amp;quot;/ssl&amp;quot; name: &amp;quot;ssl&amp;quot; - mountPath: &amp;quot;/config&amp;quot; name: &amp;quot;config&amp;quot; ports: - name: http containerPort: 80 - name: admin containerPort: 8080 - name: https containerPort: 443 args: - --configFile=/config/traefik.</description>
     </item>
     
   </channel>

@@ -68,6 +68,30 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="http://xianyuLuo.com/post/prometheus-and-k8s-1-%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6.html" title="Prometheus监控k8s(一)——监控框架调研" >Prometheus监控k8s(一)——监控框架调研</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月12日
+                            </date>
+                            
+                            <div class="post-content">
+                                背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubbernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&hellip;&hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
+此文章是Prometheus监控系列的第一篇，目的也很明确，指在于寻找一套能够胜任kubernetes集群监控的架构。
+k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB + Grafana [x] 3、Promethus + kube-state-metrics + Grafana
+ Grafana: 开源DashBoard，后端支持多种数据库，如：Influxdb、Prometheus&hellip;，插件也比较多，功能强大。非常适合用于做展示。
+ InfluxDB: 开源时间序列数据库，性能高效
+ cAdvisor: 来自 Google 的容器监控工具，也是 Kubelet 内置的容器资源收集工具。它会自动收集本机容器 CPU、内存、网络和文件系统的资源占用情况，并对外提供 cAdvisor 原生的 API。随 kubelet 启动 &ndash;cadvisor-port = 1
+   Heapster: 由于 cAdvisor 只提供了单机的容器资源占用情况，而 Heapster 则提供了整个集群的资源监控（kubernetes 1.11 之前，hpa都是从heapster获取数据），并支持持久化数据存储到 InfluxDB   Promethues: 提供强大的数据采集、数据存储、数据展示、告警等，天生完美支持kubernetes，CNCF基金会的第二个成员，第一个是Kubernetes。而且Prometheus里面很多思想都来源于Google内部的监控系统Borgmon，可以说是Google的干儿子。   kube-state-metrics在这里作为prometheus的一个exporter来使用，提供deployment、daemonset、cronjob等服务的监控数据，由kubernestes官方提供，与prometheus紧密结合。 更多关于kube-state-metrics的信息：https://github.com/kubernetes/kube-state-metrics  Prometheus优势 Prometheus和kubernetes相亲相爱 Google干儿子，大厂维护，而且最重要的一点是完美支持Kubernetes
+规范定义 Prometheus对于应用层的监控，定义了一个良好的规范，只需要应用提供接口获取日志就可以了
+Prometheus可以在各个层面实现监控，如下  基础设施层：监控各个主机服务器资源(包括Kubernetes的Node和非Kubernetes的Node)，如CPU,内存,网络吞吐和带宽占用,磁盘I/O和磁盘使用等指标。 中间件层：监控独立部署于Kubernetes集群之外的中间件，例如：MySQL、Redis、RabbitMQ、ElasticSearch、Nginx等。 Kubernetes集群：监控Kubernetes集群本身的关键指标 Kubernetes集群上部署的应用：监控部署在Kubernetes集群上的应用  基于以上三点，所以最终选择使用Prometheus来监控Kubernetes集群。……
+                            </div>
+                            <p class="readmore"><a href="http://xianyuLuo.com/post/prometheus-and-k8s-1-%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6.html">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="http://xianyuLuo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html" title="SRE附录C~事故状态文档示范" >SRE附录C~事故状态文档示范</a>
                                 </h1>
                             </header>
@@ -304,28 +328,6 @@ $ curl -L git.……
                             <p class="readmore"><a href="http://xianyuLuo.com/post/cow.html">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://xianyuLuo.com/post/%E4%BD%BF%E7%94%A8ansible%E6%8C%82%E7%9B%98.html" title="使用ansible挂盘" >使用ansible挂盘</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2017年3月23日
-                            </date>
-                            
-                            <div class="post-content">
-                                hosts: new gather_facts: False tasks:
- filesystem: fstype: ext4 dev: /dev/vdb  mount: name: /data src: /dev/vdb fstype: ext4 state: mounted
- command: mount -a
-   ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i mount_host.ini -u root -k mount_host.playbook
-技术交流可加QQ群：774332965
-
-微信订阅号同步：时下IT……
-                            </div>
-                            <p class="readmore"><a href="http://xianyuLuo.com/post/%E4%BD%BF%E7%94%A8ansible%E6%8C%82%E7%9B%98.html">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -370,6 +372,10 @@ $ curl -L git.……
 <ul class="widget-list">
     
     <li>
+        <a href="http://xianyuLuo.com/post/prometheus-and-k8s-1-%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6.html" title="Prometheus监控k8s(一)——监控框架调研">Prometheus监控k8s(一)——监控框架调研</a>
+    </li>
+    
+    <li>
         <a href="http://xianyuLuo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html" title="SRE附录C~事故状态文档示范">SRE附录C~事故状态文档示范</a>
     </li>
     
@@ -405,10 +411,6 @@ $ curl -L git.……
         <a href="http://xianyuLuo.com/post/cow.html" title="使用COW让浏览器正确上网">使用COW让浏览器正确上网</a>
     </li>
     
-    <li>
-        <a href="http://xianyuLuo.com/post/%E4%BD%BF%E7%94%A8ansible%E6%8C%82%E7%9B%98.html" title="使用ansible挂盘">使用ansible挂盘</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -440,6 +442,8 @@ $ curl -L git.……
     <a href="http://xianyuLuo.com/tags/ip/">ip</a>
     
     <a href="http://xianyuLuo.com/tags/kubernetes/">kubernetes</a>
+    
+    <a href="http://xianyuLuo.com/tags/prometheus/">prometheus</a>
     
     <a href="http://xianyuLuo.com/tags/sre/">sre</a>
     
