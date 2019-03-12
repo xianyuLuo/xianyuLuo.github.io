@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on xianyuLuo Blog</title>
+    <link>http://xianyuLuo.com/tags/about.html</link>
+    <description>Recent content in About on xianyuLuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn-ZH</language>
+    <lastBuildDate>Sat, 12 May 2018 23:48:12 +0800</lastBuildDate>
+    
+	<atom:link href="http://xianyuLuo.com/tags/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于自己</title>
+      <link>http://xianyuLuo.com/about/</link>
+      <pubDate>Sat, 12 May 2018 23:48:12 +0800</pubDate>
+      
+      <guid>http://xianyuLuo.com/about/</guid>
+      <description>学习经历  2004——2010年 四川省雅安市雨城区严桥镇 严桥三九中心校 2010——2013年 四川省雅安市雨城区 雅安市第二中学 2013——2017年 四川省乐山市市中区 乐山师范学院-计算机科学与技术-师范专业  工作经历  2016年11月——至今 成都龙渊网络科技有限公司 运维工程师  工作内容  各云平台维护；ali / hw / aws / ks / qcloud / ucloud / qingcloud / ws 基础研发部门的环境支持、应用部署、CICD实施和维护；gitlab / gitlab-ci / drone / jenkins / kubernetes / traefik / konga 大数据环境支持和维护；spark / hadoop / es / kibana 运维监控系统完善；zabbix / prometheus / send_msg 游戏业务运维；kubernetes / prometheus / jenkins / gitlab-ci 运维账务管理系统RMS完善；python / mysql / rancher / kubernetes  近况 新业务基本都使用了kubernetes技术，包括公司基础服部署务也在往k8s转。最近在研究k8s监控及k8s高级用法</description>
+    </item>
+    
+  </channel>
+</rss>

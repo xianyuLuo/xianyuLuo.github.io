@@ -6,10 +6,28 @@
     <description>Recent content in Tags on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
-    <lastBuildDate>Wed, 07 Nov 2018 22:42:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 12 May 2018 23:48:12 +0800</lastBuildDate>
     
 	<atom:link href="http://xianyuLuo.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>http://xianyuLuo.com/tags/about.html</link>
+      <pubDate>Sat, 12 May 2018 23:48:12 +0800</pubDate>
+      
+      <guid>http://xianyuLuo.com/tags/about.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Archives</title>
+      <link>http://xianyuLuo.com/tags/archives.html</link>
+      <pubDate>Mon, 12 Mar 2018 23:48:12 +0800</pubDate>
+      
+      <guid>http://xianyuLuo.com/tags/archives.html</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Https</title>
@@ -89,6 +107,24 @@
       <pubDate>Mon, 23 Oct 2017 21:35:00 +0800</pubDate>
       
       <guid>http://xianyuLuo.com/tags/vpn.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>http://xianyuLuo.com/tags/%E5%85%B3%E4%BA%8E.html</link>
+      <pubDate>Sat, 12 May 2018 23:48:12 +0800</pubDate>
+      
+      <guid>http://xianyuLuo.com/tags/%E5%85%B3%E4%BA%8E.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>归档</title>
+      <link>http://xianyuLuo.com/tags/%E5%BD%92%E6%A1%A3.html</link>
+      <pubDate>Mon, 12 Mar 2018 23:48:12 +0800</pubDate>
+      
+      <guid>http://xianyuLuo.com/tags/%E5%BD%92%E6%A1%A3.html</guid>
       <description></description>
     </item>
     

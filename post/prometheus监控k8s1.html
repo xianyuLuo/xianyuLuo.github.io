@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="cn-ZH">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.54.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Prometheus监控k8s(一)——监控框架调研 | xianyuLuo Blog</title>
+    <meta property="og:title" content="Prometheus监控k8s(一)——监控框架调研 - xianyuLuo Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-03-12T22:11:13&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-03-12T22:11:13&#43;08:00">
+        
+    <meta name="Keywords" content="python,运维,Kubernetes,Istio,ServiceMesh,xianyuLuo,博客,python,软件架构,公众号">
+    <meta name="description" content="Prometheus监控k8s(一)——监控框架调研">
+        
+    <meta name="author" content="xianyuLuo">
+    <meta property="og:url" content="http://xianyuLuo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s1.html">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://xianyuLuo.com">
+                        xianyuLuo Blog
+                    </a>
+                
+                <p class="description">当你的才华还不能支撑起你的野心时，你应该静下心来，好好学习！</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://xianyuLuo.com">首页</a>
+                    
+                    <a  href="http://xianyuLuo.com/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://xianyuLuo.com/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Prometheus监控k8s(一)——监控框架调研</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年3月12日
+                        </date>
+                        
+                        
+                        <div class="post-content">
+                            
+
+<h1 id="背景">背景</h1>
+
+<p>由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubbernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&hellip;&hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。</p>
+
+<p>此文章是Prometheus监控系列的第一篇，目的也很明确，指在于寻找一套能够胜任kubernetes集群监控的架构。</p>
+
+<h1 id="k8s监控方案调研">k8s监控方案调研</h1>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 1、cAdvisor + InfluxDB + Grafana</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 2、Heapster + InfluxDB + Grafana</label></li>
+
+<li><p>[x] 3、Promethus + kube-state-metrics + Grafana</p></li>
+
+<li><p><strong>Grafana</strong>:
+开源DashBoard，后端支持多种数据库，如：Influxdb、Prometheus&hellip;，插件也比较多，功能强大。非常适合用于做展示。</p></li>
+
+<li><p><strong>InfluxDB</strong>:
+开源时间序列数据库，性能高效</p></li>
+
+<li><p><strong>cAdvisor</strong>:
+来自 Google 的容器监控工具，也是 Kubelet 内置的容器资源收集工具。它会自动收集本机容器 CPU、内存、网络和文件系统的资源占用情况，并对外提供 cAdvisor 原生的 API。随 kubelet 启动   &ndash;cadvisor-port = 1</p></li>
+</ul>
+
+<p><img src="dl-blog.laoxianyu.cn/cadvisor.png" alt="cadvisor架构" /></p>
+
+<ul>
+<li><strong>Heapster</strong>:
+由于 cAdvisor 只提供了单机的容器资源占用情况，而 Heapster 则提供了整个集群的资源监控（kubernetes 1.11 之前，hpa都是从heapster获取数据），并支持持久化数据存储到 InfluxDB</li>
+</ul>
+
+<p><img src="dl-blog.laoxianyu.cn/heapster.png" alt="heapster架构" /></p>
+
+<ul>
+<li><strong>Promethues</strong>:
+提供强大的数据采集、数据存储、数据展示、告警等，天生完美支持kubernetes，CNCF基金会的第二个成员，第一个是Kubernetes。而且Prometheus里面很多思想都来源于Google内部的监控系统Borgmon，可以说是Google的干儿子。</li>
+</ul>
+
+<p><img src="dl-blog.laoxianyu.cn/prometheus.png" alt="Prometheus架构" /></p>
+
+<ul>
+<li><strong>kube-state-metrics</strong>在这里作为prometheus的一个exporter来使用，提供deployment、daemonset、cronjob等服务的监控数据，由kubernestes官方提供，与prometheus紧密结合。
+更多关于kube-state-metrics的信息：<a href="https://github.com/kubernetes/kube-state-metrics">https://github.com/kubernetes/kube-state-metrics</a></li>
+</ul>
+
+<h1 id="prometheus优势">Prometheus优势</h1>
+
+<h4 id="prometheus和kubernetes相亲相爱">Prometheus和kubernetes相亲相爱</h4>
+
+<p>Google干儿子，大厂维护，而且最重要的一点是完美支持Kubernetes</p>
+
+<h4 id="规范定义">规范定义</h4>
+
+<p>Prometheus对于应用层的监控，定义了一个良好的规范，只需要应用提供接口获取日志就可以了</p>
+
+<h4 id="prometheus可以在各个层面实现监控-如下">Prometheus可以在各个层面实现监控，如下</h4>
+
+<ul>
+<li>基础设施层：监控各个主机服务器资源(包括Kubernetes的Node和非Kubernetes的Node)，如CPU,内存,网络吞吐和带宽占用,磁盘I/O和磁盘使用等指标。</li>
+<li>中间件层：监控独立部署于Kubernetes集群之外的中间件，例如：MySQL、Redis、RabbitMQ、ElasticSearch、Nginx等。</li>
+<li>Kubernetes集群：监控Kubernetes集群本身的关键指标</li>
+<li>Kubernetes集群上部署的应用：监控部署在Kubernetes集群上的应用</li>
+</ul>
+
+<p>基于以上三点，所以最终选择使用Prometheus来监控Kubernetes集群。</p>
+
+<h1 id="kubernetes集群监控架构">Kubernetes集群监控架构</h1>
+
+<p>在具体讨论Prometheus监控架构之前，再来看几个实际的问题
+1. 如果有多个Kubernetes集群，怎么做？
+2. 多个Kubernetes集群的监控数据怎么处理？
+3. 告警应该怎么集中并去重？</p>
+
+<p>好在这些问题对Prometheus来说都不是难事，最终，我们采取 Prometheus + kube-state-metrics + Alertmanager + Grafana 架构来做Kubernetes集群监控。监控系统具体架构如下</p>
+
+<p><img src="dl-blog.laoxianyu.cn/prometheus-monitor.png" alt="k8s监控架构" /></p>
+
+<p>使用这个架构，那上面所提到的三个问题将不再是问题。</p>
+
+<h2 id="详解">详解</h2>
+
+<h3 id="k8s集群">K8s集群：</h3>
+
+<p>k8s集群-1/-2/-3为需要被监控的集群，就是业务集群。每个集群内部都部署了一个Prometheus，主要由两部分组成 prometheus-server + kube-state-metrics。</p>
+
+<p>prometheus-server：使用一个带RBAC权限的账号采集集群中现有监控信息（其实是从cadvisor获取）和节点信息。</p>
+
+<p>kube-state-metrics：这里作为prometheus的exporter使用。因为prometheus不能获取集群中Deployment, Job, CronJob的监控信息。
+部署kube-state-metrics的时候，svc一定要带一个annotations：prometheus.io/scrape: &lsquo;true&rsquo;（==这非常重要==）</p>
+
+<h3 id="监控汇总">监控汇总</h3>
+
+<p>监控汇总其实就是一个Prometheus-server，用于将各个散落在各地的监控数据汇总起来，统一管理。</p>
+
+<p>核心思想是利用Prometheus的federation机制，从其他集群pull数据。这样其他集群的prometheus只需要短暂存储数据，汇总之后再做长期存储；同时还可以统一做告警判断和数据展示。</p>
+
+<p>Prometheus官方Federation示例</p>
+
+<pre><code>- job_name: 'federate'
+  scrape_interval: 15s
+
+  honor_labels: true
+  metrics_path: '/federate'
+
+  params:
+    'match[]':
+      - '{job=&quot;prometheus&quot;}'
+      - '{__name__=~&quot;prometheus_job:.*&quot;}'
+
+  static_configs:
+    - targets:
+      - 'source-prometheus-1:9090'
+      - 'source-prometheus-2:9090'
+      - 'source-prometheus-3:9090'
+</code></pre>
+
+<p>这段配置所属的Prometheus将从source-prometheus-1 ~ 3这3个Prometheus的/federate端点拉取监控数据。 match[]参数指定了只拉取带有job=”prometheus标签的指标，或者名称以prometheus_job开头的指标。</p>
+
+<h3 id="展示面板">展示面板</h3>
+
+<p>展示面板就是一个Grafana，支持使用Prometheus做为数据源进行绘图展示。</p>
+
+<h3 id="告警处理">告警处理</h3>
+
+<p>告警是利用Prometheus官方提供的Altermanager模块。Alermanager模块从Prometheus-Server接收告警信息，然后进行汇总、屏蔽、告警&hellip;等等操作。Alertmanager告警途径支持有email、wechat、webhook、slack等等，非常丰富。但是这里使用的是自身开发的Send_msg模块。</p>
+
+<h3 id="消息发送">消息发送</h3>
+
+<p>自开发的消息发送模块，集成email、微信、钉钉、短信等方式。其实不止告警时会发送消息，还有其他地方也会用到消息发送。</p>
+
+<p>==监控架构清楚之后，接下来就是实施监控的一个过程了，具体实施步骤请看“Prometheus系列”第二篇文章。==</p>
+
+<h1 id="结束">结束</h1>
+
+<p>此文章也是“使用prometheus完美监控kubernetes集群”系列的第一篇，对文章有不理解的地方，欢迎随时后台留言。</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/ingress%E4%BB%8B%E7%BB%8D.html">Ingress介绍</a></li>
+        
+        <li><a href="/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">traefik在kubernetes中的应用</a></li>
+        
+        <li><a href="/ablout.html">Ablout</a></li>
+        
+        <li><a href="/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html">SRE附录C~事故状态文档示范</a></li>
+        
+        <li><a href="/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html">SRE附录D~事后总结示范</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="http://xianyuLuo.com/tags/prometheus">prometheus</a></li>
+                                
+                                <li><a href="http://xianyuLuo.com/tags/kubernetes">kubernetes</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://xianyuLuo.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s1.html" title="Prometheus监控k8s(一)——监控框架调研">Prometheus监控k8s(一)——监控框架调研</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/sre%E9%99%84%E5%BD%95c-%E4%BA%8B%E6%95%85%E7%8A%B6%E6%80%81%E6%96%87%E6%A1%A3%E7%A4%BA%E8%8C%83.html" title="SRE附录C~事故状态文档示范">SRE附录C~事故状态文档示范</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83.html" title="SRE附录D~事后总结示范">SRE附录D~事后总结示范</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/sre%E9%99%84%E5%BD%95f-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BC%9A%E8%AE%AE%E8%AE%B0%E5%BD%95%E7%A4%BA%E8%8C%83.html" title="SRE附录F~生产环境会议记录示范">SRE附录F~生产环境会议记录示范</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/ingress%E4%BB%8B%E7%BB%8D.html" title="Ingress介绍">Ingress介绍</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/%E4%BD%BF%E7%94%A8let-s-encript%E7%94%B3%E8%AF%B7%E9%80%9A%E9%85%8D%E7%AC%A6%E8%AF%81%E4%B9%A6.html" title="使用let&#39;s encript申请通配符证书">使用let&#39;s encript申请通配符证书</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html" title="traefik在kubernetes中的应用">traefik在kubernetes中的应用</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/tcp%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E5%92%8C%E5%9D%97%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86.html" title="tcp交互数据和块数据处理">tcp交互数据和块数据处理</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/tcp%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2.html" title="tcp连接的建立与终止">tcp连接的建立与终止</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/post/cow.html" title="使用COW让浏览器正确上网">使用COW让浏览器正确上网</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://xianyuLuo.com/categories/kubernetes/">kubernetes(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://xianyuLuo.com/categories/%E7%BD%91%E7%BB%9C/">网络(10)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://xianyuLuo.com/tags/about/">about</a>
+    
+    <a href="http://xianyuLuo.com/tags/archives/">archives</a>
+    
+    <a href="http://xianyuLuo.com/tags/https/">https</a>
+    
+    <a href="http://xianyuLuo.com/tags/ingress/">ingress</a>
+    
+    <a href="http://xianyuLuo.com/tags/ip/">ip</a>
+    
+    <a href="http://xianyuLuo.com/tags/kubernetes/">kubernetes</a>
+    
+    <a href="http://xianyuLuo.com/tags/prometheus/">prometheus</a>
+    
+    <a href="http://xianyuLuo.com/tags/sre/">sre</a>
+    
+    <a href="http://xianyuLuo.com/tags/tcp/">tcp</a>
+    
+    <a href="http://xianyuLuo.com/tags/traefik/">traefik</a>
+    
+    <a href="http://xianyuLuo.com/tags/vpn/">vpn</a>
+    
+    <a href="http://xianyuLuo.com/tags/%E5%85%B3%E4%BA%8E/">关于</a>
+    
+    <a href="http://xianyuLuo.com/tags/%E5%BD%92%E6%A1%A3/">归档</a>
+    
+    <a href="http://xianyuLuo.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="http://xianyuLuo.com/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://xianyuLuo.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2018 <a href="http://xianyuLuo.com">xianyuLuo Blog By xianyuLuo</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>
