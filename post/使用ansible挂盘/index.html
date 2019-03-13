@@ -7,20 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>关于自己 | xianyuLuo Blog</title>
-    <meta property="og:title" content="关于自己 - xianyuLuo Blog">
+    <title>使用ansible挂盘 | xianyuLuo Blog</title>
+    <meta property="og:title" content="使用ansible挂盘 - xianyuLuo Blog">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-05-12T23:48:12&#43;08:00">
+    <meta property="article:published_time" content="2017-03-23T19:03:51&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-05-12T23:48:12&#43;08:00">
+    <meta property="article:modified_time" content="2017-03-23T19:03:51&#43;08:00">
         
     <meta name="Keywords" content="python,运维,Kubernetes,Istio,ServiceMesh,xianyuLuo,博客,python,软件架构,公众号">
-    <meta name="description" content="当你的才华还不能支撑起你的野心时，你应该静下心来，好好学习！">
+    <meta name="description" content="使用ansible挂盘">
         
     <meta name="author" content="xianyuLuo">
-    <meta property="og:url" content="http://xianyuluo.com/about/">
+    <meta property="og:url" content="http://xianyuluo.com/post/%E4%BD%BF%E7%94%A8ansible%E6%8C%82%E7%9B%98/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
@@ -51,11 +51,11 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="http://xianyuluo.com">首页</a>
+                    <a class="current" href="http://xianyuluo.com">首页</a>
                     
                     <a  href="http://xianyuluo.com/archives/" title="归档">归档</a>
                     
-                    <a class="current" href="http://xianyuluo.com/about/" title="关于">关于</a>
+                    <a  href="http://xianyuluo.com/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -72,64 +72,40 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">关于自己</h1>
+                            <h1 class="post-title">使用ansible挂盘</h1>
                         </header>
                         <date class="post-meta meta-date">
-                            2018年5月12日
+                            2017年3月23日
                         </date>
                         
                         
                         <div class="post-content">
-                            
-
-<h3 id="学习经历">学习经历</h3>
-
-<ul>
-<li>2004——2010年 四川省雅安市雨城区严桥镇 严桥三九中心校</li>
-<li>2010——2013年 四川省雅安市雨城区 雅安市第二中学</li>
-<li>2013——2017年 四川省乐山市市中区 乐山师范学院-计算机科学与技术-师范专业</li>
-</ul>
-
-<h3 id="工作经历">工作经历</h3>
+                            <ul>
+<li><p>hosts: new
+gather_facts: False
+tasks:</p>
 
 <ul>
-<li>2016年11月——至今 成都龙渊网络科技有限公司 运维工程师</li>
+<li>filesystem:
+fstype: ext4
+dev: /dev/vdb
+<!-- more --></li>
+
+<li><p>mount:
+name: /data
+src: /dev/vdb
+fstype: ext4
+state: mounted</p></li>
+
+<li><p>command: mount -a</p></li>
+</ul></li>
 </ul>
 
-<h3 id="工作内容">工作内容</h3>
+<p>ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook   -i mount_host.ini -u root -k mount_host.playbook</p>
 
-<ul>
-<li>各云平台维护；ali / hw / aws / ks / qcloud / ucloud / qingcloud / ws</li>
-<li>基础研发部门的环境支持、应用部署、CICD实施和维护；gitlab / gitlab-ci / drone / jenkins / kubernetes / traefik / konga</li>
-<li>大数据环境支持和维护；spark / hadoop / es / kibana</li>
-<li>运维监控系统完善；zabbix / prometheus / send_msg</li>
-<li>游戏业务运维；kubernetes / prometheus / jenkins / gitlab-ci</li>
-<li>运维账务管理系统RMS完善；python / mysql / rancher / kubernetes</li>
-</ul>
+<p><font color=#ff1201>技术交流可加QQ群：<strong>774332965</strong><br></font></p>
 
-<h3 id="近况">近况</h3>
-
-<p>新业务基本都使用了kubernetes技术，包括公司基础服部署务也在往k8s转。最近在研究k8s监控及k8s高级用法</p>
-
-<h3 id="职业规划">职业规划</h3>
-
-<ul>
-<li>2016——2018 运维</li>
-<li>2019——&hellip;  运维开发，打算先学python，后面在看golang</li>
-</ul>
-
-<h3 id="思考">思考</h3>
-
-<ul>
-<li>运维这个职业在很多人眼里平时一般都没什么事情，其实不然。运维所需的知识面非常广，网络、操作系统、软硬件、工具、各云平台实现的底层技术、各云平台产品了解……；拿业务运维来说，运维应该了解所负责业务的开发技术、开发环境、从客户端到服务端的各个过程、请求等等，在此基础上为业务提供一个稳定的环境，规范开发交付、更新规范，提供一种高效的方法，如CICD实施；做到比开发更了解业务，熟悉业务，当出现问题时能够快速定位，为业务架构提供优化建议。基础设施运维工作更加繁琐，维护机房、公司软硬件等等，业务之下的事情基本都是运维包了。再往后走应该在公司层面思考问题，如何给公司带来更好更稳定的环境，体现自己更高的价值。</li>
-<li>开发的价值在项目层面体现，运维的价值在项目层面和公司层面体现！</li>
-<li>都说优秀的运维少之又少，希望以后能成为一个优秀的运维！
-(以上均属个人看法，如有不妥之处，还请各位及时指出)</li>
-</ul>
-
-<h3 id="更新">更新</h3>
-
-<p>每半年更新一次！</p>
+<p><font color=#ff1201>微信订阅号同步：<strong>时下IT</strong></font></p>
 
                         </div>
 
@@ -142,15 +118,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/archives/">归档</a></li>
+        <li><a href="/post/osi%E4%B8%83%E5%B1%82%E5%8D%8F%E8%AE%AE%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3/">OSI七层协议详细讲解</a></li>
         
-        <li><a href="/post/tcp%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E5%92%8C%E5%9D%97%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">tcp交互数据和块数据处理</a></li>
+        <li><a href="/post/osi-iso%E4%B8%83%E5%B1%82/">OSI/ISO七层——TCP/IP四层</a></li>
         
-        <li><a href="/post/tcp%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2/">tcp连接的建立与终止</a></li>
+        <li><a href="/post/ip%E5%8D%8F%E8%AE%AE/">IP协议</a></li>
         
-        <li><a href="/post/cow/">使用COW让浏览器正确上网</a></li>
+        <li><a href="/post/icmp%E5%8D%8F%E8%AE%AE/">ICMP</a></li>
         
-        <li><a href="/post/%E4%BD%BF%E7%94%A8ansible%E6%8C%82%E7%9B%98/">使用ansible挂盘</a></li>
+        <li><a href="/post/ttl/">TTL</a></li>
         
     </ul>
 </div>
@@ -158,13 +134,7 @@
 
                         <div class="post-meta meta-tags">
                             
-                            <ul class="clearfix">
-                                
-                                <li><a href="http://xianyuluo.com/tags/about">about</a></li>
-                                
-                                <li><a href="http://xianyuluo.com/tags/%E5%85%B3%E4%BA%8E">关于</a></li>
-                                
-                            </ul>
+                            没有标签
                             
                         </div>
                     </article>

@@ -17,8 +17,8 @@
       <pubDate>Tue, 12 Mar 2019 22:11:13 +0800</pubDate>
       
       <guid>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%80%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94/</guid>
-      <description>背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubbernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&amp;hellip;&amp;hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
-此文章是Prometheus监控系列的第一篇，目的也很明确，指在于寻找一套能够胜任kubernetes集群监控的架构。
+      <description>背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&amp;hellip;&amp;hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
+此文章是Prometheus监控系列的第一篇，目的也很明确，旨在于寻找一套能够胜任kubernetes集群监控的架构。
 k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB + Grafana [x] 3、Promethus + kube-state-metrics + Grafana
  Grafana: 开源DashBoard，后端支持多种数据库，如：Influxdb、Prometheus&amp;hellip;，插件也比较多，功能强大。非常适合用于做展示。
  InfluxDB: 开源时间序列数据库，性能高效
