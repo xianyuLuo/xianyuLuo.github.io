@@ -25,7 +25,17 @@ k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB 
  cAdvisor: 来自 Google 的容器监控工具，也是 Kubelet 内置的容器资源收集工具。它会自动收集本机容器 CPU、内存、网络和文件系统的资源占用情况，并对外提供 cAdvisor 原生的 API。随 kubelet 启动 &amp;ndash;cadvisor-port = 1
    Heapster: 由于 cAdvisor 只提供了单机的容器资源占用情况，而 Heapster 则提供了整个集群的资源监控（kubernetes 1.11 之前，hpa都是从heapster获取数据），并支持持久化数据存储到 InfluxDB   Promethues: 提供强大的数据采集、数据存储、数据展示、告警等，天生完美支持kubernetes，CNCF基金会的第二个成员，第一个是Kubernetes。而且Prometheus里面很多思想都来源于Google内部的监控系统Borgmon，可以说是Google的干儿子。   kube-state-metrics在这里作为prometheus的一个exporter来使用，提供deployment、daemonset、cronjob等服务的监控数据，由kubernestes官方提供，与prometheus紧密结合。 更多关于kube-state-metrics的信息：https://github.com/kubernetes/kube-state-metrics  Prometheus优势 Prometheus和kubernetes相亲相爱 Google干儿子，大厂维护，而且最重要的一点是完美支持Kubernetes
 规范定义 Prometheus对于应用层的监控，定义了一个良好的规范，只需要应用提供接口获取日志就可以了
-Prometheus可以在各个层面实现监控，如下  基础设施层：监控各个主机服务器资源(包括Kubernetes的Node和非Kubernetes的Node)，如CPU,内存,网络吞吐和带宽占用,磁盘I/O和磁盘使用等指标。 中间件层：监控独立部署于Kubernetes集群之外的中间件，例如：MySQL、Redis、RabbitMQ、ElasticSearch、Nginx等。 Kubernetes集群：监控Kubernetes集群本身的关键指标 Kubernetes集群上部署的应用：监控部署在Kubernetes集群上的应用  基于以上三点，所以最终选择使用Prometheus来监控Kubernetes集群。</description>
+Prometheus可以在各个层面实现监控，如下  基础设施层：监控各个主机服务器资源(包括Kubernetes的Node和非Kubernetes的Node)，如CPU,内存,网络吞吐和带宽占用,磁盘I/O和磁盘使用等指标。 中间件层：监控独立部署于Kubernetes集群之外的中间件，例如：MySQL、Redis、RabbitMQ、ElasticSearch、Nginx等。 Kubernetes集群：监控Kubernetes集群本身的关键指标 Kubernetes集群上部署的应用：监控部署在Kubernetes集群上的应用  基于以上三点，所以最终选择使用Prometheus来监控Kubernetes集群。
+Kubernetes集群监控架构 在具体讨论Prometheus监控架构之前，再来看几个实际的问题 1. 如果有多个Kubernetes集群，怎么做？ 2. 多个Kubernetes集群的监控数据怎么处理？ 3. 告警应该怎么集中并去重？
+好在这些问题对Prometheus来说都不是难事，最终，我们采取 Prometheus + kube-state-metrics + Alertmanager + Grafana 架构来做Kubernetes集群监控。监控系统具体架构如下
+使用这个架构，那上面所提到的三个问题将不再是问题。
+详解 K8s集群： k8s集群-1/-2/-3为需要被监控的集群，就是业务集群。每个集群内部都部署了一个Prometheus，主要由两部分组成 prometheus-server + kube-state-metrics。
+prometheus-server：使用一个带RBAC权限的账号采集集群中现有监控信息（其实是从cadvisor获取）和节点信息。
+kube-state-metrics：这里作为prometheus的exporter使用。因为prometheus不能获取集群中Deployment, Job, CronJob的监控信息。 部署kube-state-metrics的时候，svc一定要带一个annotations：prometheus.io/scrape: &amp;lsquo;true&amp;rsquo;（==这非常重要==）
+监控汇总 监控汇总其实就是一个Prometheus-server，用于将各个散落在各地的监控数据汇总起来，统一管理。
+核心思想是利用Prometheus的federation机制，从其他集群pull数据。这样其他集群的prometheus只需要短暂存储数据，汇总之后再做长期存储；同时还可以统一做告警判断和数据展示。
+Prometheus官方Federation示例
+- job_name: &#39;federate&#39; scrape_interval: 15s honor_labels: true metrics_path: &#39;/federate&#39; params: &#39;match[]&#39;: - &#39;{job=&amp;quot;prometheus&amp;quot;}&#39; - &#39;{__name__=~&amp;quot;prometheus_job:.*&amp;quot;}&#39; static_configs: - targets: - &#39;source-prometheus-1:9090&#39; - &#39;source-prometheus-2:9090&#39; - &#39;source-prometheus-3:9090&#39;  这段配置所属的Prometheus将从source-prometheus-1 ~ 3这3个Prometheus的/federate端点拉取监控数据。 match[]参数指定了只拉取带有job=”prometheus标签的指标，或者名称以prometheus_job开头的指标。</description>
     </item>
     
     <item>
@@ -45,7 +55,9 @@ Prometheus可以在各个层面实现监控，如下  基础设施层：监控�
  2015-10-21 15:21 UTC jennifer  ——将所有流量导向USA-2泄洪集群，同事将其他集群下线，以便让这些集群从连锁故障中恢复，同时启动更多任务
 ——MapReduce索引任务完成，等待Bigdata复制到所有集群
  2015-10-21 15:10 UTC martym  ——向Shakespeare corpus中增加新的韵文，同时启动MapReduce任务
- 2015-10-21 15:04 UTC martym  ——从Shakespeare-discuss@ 邮件列表中获得了新发现的韵文全文</description>
+ 2015-10-21 15:04 UTC martym  ——从Shakespeare-discuss@ 邮件列表中获得了新发现的韵文全文
+ 2015-10-21 15:01 UTC docbrown   ——由于出现连锁故障，声明目前进入紧急状态
+ 2015-10-21 14:55 UTC docbrown   ——出现大量紧急报警，全部集群出现 ManyHttp500s</description>
     </item>
     
     <item>
@@ -54,7 +66,7 @@ Prometheus可以在各个层面实现监控，如下  基础设施层：监控�
       <pubDate>Sun, 10 Mar 2019 12:10:18 +0800</pubDate>
       
       <guid>http://xianyuluo.com/post/sre%E9%99%84%E5%BD%95d-%E4%BA%8B%E5%90%8E%E6%80%BB%E7%BB%93%E7%A4%BA%E8%8C%83/</guid>
-      <description>莎士比亚新询文事故总结（事故编号 #465） 日期 2015-10-21
+      <description> 莎士比亚新询文事故总结（事故编号 #465） 日期 2015-10-21
 作者 Jennifer、martym、agoogler
 目前状态 已经终稿，待办事项正在进行中
 摘要 莎士比亚搜索服务出现66分钟的故障，由于新发现了一篇韵文，导致用户流量暴涨。
@@ -63,7 +75,8 @@ Prometheus可以在各个层面实现监控，如下  基础设施层：监控�
 触发条件 潜伏性的Bug被大量上涨流量所触发
 解决方案 将流量导向泄洪集群，同时增加了10倍容量，以应对连锁故障。部署了更新过的索引，绕过了潜在的Bug，在公共对新韵文的兴趣消退之前，保持额外的容量。资源泄露的问题已经被找到，并且修复已经上线
 检测 我检测到大量的 HTTP 500的情况，向on-call发送了紧急报警
-代办事项    待办事项 类型 负责人                     经验教训 做的好的地方  监控系统在大量错误的情况下快速发出了告警 在所有集群中快速更新的 Shakespeare Corpus  做的不好的地方  对连锁故障的处理不够熟练 由于这次大幅度的流量增长，几乎全部请求都失败了，导致我们超过了可用性与错误预算数个数量级。  幸运的因素  莎士比亚迷的邮件列表里刚好有一份新的韵文文本 服务日志中包括了指出文件描述符耗尽问题导致崩溃的栈跟踪 致死请求通过推送新的索引关键词就解决了  时间线 2015-10-21（所有时区都是UTC） + 14:51 新闻报道新的莎士比亚韵文在一辆Delorean车的杂物箱中发现 + 14:54 事故开始，搜索后端在高负载的情况下崩溃 + …… + 15:01 应急故障管理开始 + …… + 15:36 故障缓解 + …… + 16:00 故障结束</description>
+代办事项    待办事项 类型 负责人                     经验教训 做的好的地方  监控系统在大量错误的情况下快速发出了告警 在所有集群中快速更新的 Shakespeare Corpus  做的不好的地方  对连锁故障的处理不够熟练 由于这次大幅度的流量增长，几乎全部请求都失败了，导致我们超过了可用性与错误预算数个数量级。  幸运的因素  莎士比亚迷的邮件列表里刚好有一份新的韵文文本 服务日志中包括了指出文件描述符耗尽问题导致崩溃的栈跟踪 致死请求通过推送新的索引关键词就解决了  时间线 2015-10-21（所有时区都是UTC） + 14:51 新闻报道新的莎士比亚韵文在一辆Delorean车的杂物箱中发现 + 14:54 事故开始，搜索后端在高负载的情况下崩溃 + …… + 15:01 应急故障管理开始 + …… + 15:36 故障缓解 + …… + 16:00 故障结束
+其他支持信息 </description>
     </item>
     
     <item>
@@ -113,7 +126,14 @@ Let’s Encrypt 已经得了 IdenTrust 的交叉签名，这意味着其证书�
 什么是通配符证书 域名通配符证书类似 DNS 解析的泛域名概念，通配符证书就是证书中可以包含一个通配符。主域名签发的通配符证书可以在所有子域名中使用，比如 ×.baidu.com，*.laoxianyu.cn。
 申请通配符证书 Let’s Encrypt 上的证书申请是通过 ACME 协议来完成的。ACME协议规范化了证书申请、更新、撤销流程，实现了 Let’s Encrypt CA 自动化操作。解决了传统的 CA 机构是人工手动处理证书申请、证书更新、证书撤销的效率和成本问题。
 ACME v2 是 ACME 协议的更新版本，通配符证书只能通过 ACME v2 获得。要使用 ACME v2 协议申请通配符证书，只需一个支持该协议的客户端就可以了，官方推荐的客户端是 Certbot。
-获取 Certbot 客户端 # 下载 Certbot 客户端 $ wget https://dl.</description>
+获取 Certbot 客户端 # 下载 Certbot 客户端 $ wget https://dl.eff.org/certbot-auto # 设为可执行权限 $ chmod a+x certbot-auto   注：Certbot 从 0.22.0 版本开始支持 ACME v2，如果你之前已安装旧版本客户端程序需更新到新版本。
+  更详细的安装可参考官方文档：https://certbot.eff.org/
+申请通配符证书 客户在申请 Let’s Encrypt 证书的时候，需要校验域名的所有权，证明操作者有权利为该域名申请证书，目前支持三种验证方式：
+ dns-01：给域名添加一个 DNS TXT 记录。 http-01：在域名对应的 Web 服务器下放置一个 HTTP well-known URL 资源文件。 tls-sni-01：在域名对应的 Web 服务器下放置一个 HTTPS well-known URL 资源文件。  使用 Certbot 客户端申请证书方法非常的简单，只需如下一行命令就搞定了。
+$ ./certbot-auto certonly -d &amp;quot;*.laoxianyu.cn&amp;quot; --manual --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory  1.申请通配符证书，只能使用 dns-01 的方式。
+2.laoxianyu.com 请根据自己的域名自行更改。
+相关参数说明：
+certonly 表示插件，Certbot 有很多插件。不同的插件都可以申请证书，用户可以根据需要自行选择。</description>
     </item>
     
     <item>
@@ -125,7 +145,8 @@ ACME v2 是 ACME 协议的更新版本，通配符证书只能通过 ACME v2 获
       <description>目的： 通过本篇文章，能够简单了解和掌握Traefik在Kubernetes中的应用
 如果不了解ingress和ingress-controller概念，请先看前一篇文章。http://km.oa.dragonest.com/x/RoFf
 traefik介绍： 开源的微服务网关服务，支持Mesos、Docker、Rancher、Kubernetes等等，也支持直接部署在物理服务器。能够实现负载均衡、HTTPS、自动更新Ingerss配置等等
-traefik部署： traefik-deployment部署 apiVersion: extensions/v1beta1 kind: Deployment metadata: name: traefik-ingress-controller namespace: traefik labels: k8s-app: traefik-ingress-lb spec: replicas: 1 selector: matchLabels: k8s-app: traefik-ingress-lb template: metadata: labels: k8s-app: traefik-ingress-lb name: traefik-ingress-lb spec: nodeSelector: traefik-controller-qa: &amp;quot;yes&amp;quot; serviceAccountName: traefik-ingress-controller terminationGracePeriodSeconds: 60 volumes: - name: ssl secret: secretName: traefik-cert - name: config configMap: name: traefik-conf containers: - image: traefik name: traefik-ingress-lb volumeMounts: - mountPath: &amp;quot;/ssl&amp;quot; name: &amp;quot;ssl&amp;quot; - mountPath: &amp;quot;/config&amp;quot; name: &amp;quot;config&amp;quot; ports: - name: http containerPort: 80 - name: admin containerPort: 8080 - name: https containerPort: 443 args: - --configFile=/config/traefik.</description>
+traefik部署： traefik-deployment部署 apiVersion: extensions/v1beta1 kind: Deployment metadata: name: traefik-ingress-controller namespace: traefik labels: k8s-app: traefik-ingress-lb spec: replicas: 1 selector: matchLabels: k8s-app: traefik-ingress-lb template: metadata: labels: k8s-app: traefik-ingress-lb name: traefik-ingress-lb spec: nodeSelector: traefik-controller-qa: &amp;quot;yes&amp;quot; serviceAccountName: traefik-ingress-controller terminationGracePeriodSeconds: 60 volumes: - name: ssl secret: secretName: traefik-cert - name: config configMap: name: traefik-conf containers: - image: traefik name: traefik-ingress-lb volumeMounts: - mountPath: &amp;quot;/ssl&amp;quot; name: &amp;quot;ssl&amp;quot; - mountPath: &amp;quot;/config&amp;quot; name: &amp;quot;config&amp;quot; ports: - name: http containerPort: 80 - name: admin containerPort: 8080 - name: https containerPort: 443 args: - --configFile=/config/traefik.toml - --web - --kubernetes - --logLevel=INFO  traefik-svc部署 apiVersion: v1 kind: Service metadata: name: traefik-ingress-service namespace: traefik spec: selector: k8s-app: traefik-ingress-lb ports: - protocol: TCP port: 80 name: web - protocol: TCP port: 8080 name: admin - protocol: TCP port: 443 name: https type: LoadBalancer  其他证书、secret、configmap、rbac编排请见文章末尾链接！
+实例应用： 该案例中使用website的一个demo站点做为测试，站点内容见： http://website-dev-demo.</description>
     </item>
     
     <item>
@@ -173,7 +194,16 @@ $ vim .cow/rc listen = cow://aes-128-cfb:xxx:5555 logFile = /var/log/cow.log  �
 3、启动
 ./cow &amp;amp;  此时会在该服务器上监听5555端口，等待内网服务器去连接。
 内网服务器(192.168.1.11) 1、下载COW二进制文件
-$ curl -L git.</description>
+$ curl -L git.io/cow | bash  此时会在当前目录下生成一个 cow 二进制文件，和 .cow/ 目录。cow 为启动程序，.cow/ 里面是配置文件。
+2、修改配置文件
+$ vim .cow/rc logFile = /var/log/cow.log listen = http://0.0.0.0:7777 proxy = protocol://aes-128-cfb:xxx@server_ip:5555  这儿也只需要两行配置。xxx和香港的一样密码，server_ip为香港服务器IP，5555是香港COW监听的端口。 listen监听的7777端口是和客户端连接的。
+3、启动
+./cow &amp;amp;  此时会通过xxx密码和香港的5555端口连接，并监听本地的7777端口。
+内网服务器和香港服务器的连接情况如下  6.6.6.6启动cow暴露自己的5555端口 192.168.1.11启动cow去和6.6.6.6的5555端口建立连接并暴露自己的7777端口，等待客户端连接  客户端使用 注意：这里的填的地址是 192.168.1.11:7777/pac 后面多了一个pac，直接访问这个地址会下载一个文件，浏览器就是根据文件里面的内容去选择你访问的网站是走国内访问还是走香港访问。 大功告成。
+回顾一下操作步骤 1、6.6.6.6启动cow暴露自己5555端口 2、192.168.1.11启动cow和6.6.6.6的5555建立连接并暴露7777端口 3、客户端配置 internet连接
+技术交流可加QQ群：774332965
+
+微信订阅号同步：时下IT</description>
     </item>
     
     <item>

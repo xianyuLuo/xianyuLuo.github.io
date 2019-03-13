@@ -23,7 +23,14 @@ Let’s Encrypt 已经得了 IdenTrust 的交叉签名，这意味着其证书�
 什么是通配符证书 域名通配符证书类似 DNS 解析的泛域名概念，通配符证书就是证书中可以包含一个通配符。主域名签发的通配符证书可以在所有子域名中使用，比如 ×.baidu.com，*.laoxianyu.cn。
 申请通配符证书 Let’s Encrypt 上的证书申请是通过 ACME 协议来完成的。ACME协议规范化了证书申请、更新、撤销流程，实现了 Let’s Encrypt CA 自动化操作。解决了传统的 CA 机构是人工手动处理证书申请、证书更新、证书撤销的效率和成本问题。
 ACME v2 是 ACME 协议的更新版本，通配符证书只能通过 ACME v2 获得。要使用 ACME v2 协议申请通配符证书，只需一个支持该协议的客户端就可以了，官方推荐的客户端是 Certbot。
-获取 Certbot 客户端 # 下载 Certbot 客户端 $ wget https://dl.</description>
+获取 Certbot 客户端 # 下载 Certbot 客户端 $ wget https://dl.eff.org/certbot-auto # 设为可执行权限 $ chmod a+x certbot-auto   注：Certbot 从 0.22.0 版本开始支持 ACME v2，如果你之前已安装旧版本客户端程序需更新到新版本。
+  更详细的安装可参考官方文档：https://certbot.eff.org/
+申请通配符证书 客户在申请 Let’s Encrypt 证书的时候，需要校验域名的所有权，证明操作者有权利为该域名申请证书，目前支持三种验证方式：
+ dns-01：给域名添加一个 DNS TXT 记录。 http-01：在域名对应的 Web 服务器下放置一个 HTTP well-known URL 资源文件。 tls-sni-01：在域名对应的 Web 服务器下放置一个 HTTPS well-known URL 资源文件。  使用 Certbot 客户端申请证书方法非常的简单，只需如下一行命令就搞定了。
+$ ./certbot-auto certonly -d &amp;quot;*.laoxianyu.cn&amp;quot; --manual --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory  1.申请通配符证书，只能使用 dns-01 的方式。
+2.laoxianyu.com 请根据自己的域名自行更改。
+相关参数说明：
+certonly 表示插件，Certbot 有很多插件。不同的插件都可以申请证书，用户可以根据需要自行选择。</description>
     </item>
     
   </channel>
