@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kubernetes on xianyuLuo Blog</title>
-    <link>http://xianyuLuo.com/tags/kubernetes.html</link>
+    <link>http://xianyuluo.com/tags/kubernetes/</link>
     <description>Recent content in Kubernetes on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
     <lastBuildDate>Tue, 12 Mar 2019 22:11:13 +0800</lastBuildDate>
     
-	<atom:link href="http://xianyuLuo.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xianyuluo.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Prometheus监控k8s(一)——监控框架调研</title>
-      <link>http://xianyuLuo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s1.html</link>
+      <link>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s1/</link>
       <pubDate>Tue, 12 Mar 2019 22:11:13 +0800</pubDate>
       
-      <guid>http://xianyuLuo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s1.html</guid>
+      <guid>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s1/</guid>
       <description>背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubbernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&amp;hellip;&amp;hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
 此文章是Prometheus监控系列的第一篇，目的也很明确，指在于寻找一套能够胜任kubernetes集群监控的架构。
 k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB + Grafana [x] 3、Promethus + kube-state-metrics + Grafana
@@ -30,10 +30,10 @@ Prometheus可以在各个层面实现监控，如下  基础设施层：监控�
     
     <item>
       <title>Ingress介绍</title>
-      <link>http://xianyuLuo.com/post/ingress%E4%BB%8B%E7%BB%8D.html</link>
+      <link>http://xianyuluo.com/post/ingress%E4%BB%8B%E7%BB%8D/</link>
       <pubDate>Fri, 09 Nov 2018 18:29:30 +0800</pubDate>
       
-      <guid>http://xianyuLuo.com/post/ingress%E4%BB%8B%E7%BB%8D.html</guid>
+      <guid>http://xianyuluo.com/post/ingress%E4%BB%8B%E7%BB%8D/</guid>
       <description>&lt;h1 id=&#34;概念&#34;&gt;概念&lt;/h1&gt;
 
 &lt;p&gt;Ingress是kubernetes1.1之后官方提出的一个标准，按照这套标准它有多种实现，比如 nginx-ingress-controller、traefik-ingress-controller、kong-ingress-controller，这3中都是官方推荐的。Ingress的出现解决了Service的短板：只能在tcp层面做负载均衡。而ingress可以方便的做http/https层面的负载均衡。一个是在4层，一个在7层。ingress就是控制客户端从入口连接到k8s集群服务的规则的集合！&lt;/p&gt;
@@ -47,10 +47,10 @@ Prometheus可以在各个层面实现监控，如下  基础设施层：监控�
     
     <item>
       <title>traefik在kubernetes中的应用</title>
-      <link>http://xianyuLuo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html</link>
+      <link>http://xianyuluo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</link>
       <pubDate>Mon, 10 Sep 2018 22:08:46 +0800</pubDate>
       
-      <guid>http://xianyuLuo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html</guid>
+      <guid>http://xianyuluo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
       <description>目的： 通过本篇文章，能够简单了解和掌握Traefik在Kubernetes中的应用
 如果不了解ingress和ingress-controller概念，请先看前一篇文章。http://km.oa.dragonest.com/x/RoFf
 traefik介绍： 开源的微服务网关服务，支持Mesos、Docker、Rancher、Kubernetes等等，也支持直接部署在物理服务器。能够实现负载均衡、HTTPS、自动更新Ingerss配置等等

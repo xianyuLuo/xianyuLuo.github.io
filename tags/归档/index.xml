@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>归档 on xianyuLuo Blog</title>
-    <link>http://xianyuLuo.com/tags/%E5%BD%92%E6%A1%A3.html</link>
+    <link>http://xianyuluo.com/tags/%E5%BD%92%E6%A1%A3/</link>
     <description>Recent content in 归档 on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
     <lastBuildDate>Mon, 12 Mar 2018 23:48:12 +0800</lastBuildDate>
     
-	<atom:link href="http://xianyuLuo.com/tags/%E5%BD%92%E6%A1%A3/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xianyuluo.com/tags/%E5%BD%92%E6%A1%A3/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>归档</title>
-      <link>http://xianyuLuo.com/archives/</link>
+      <link>http://xianyuluo.com/archives/</link>
       <pubDate>Mon, 12 Mar 2018 23:48:12 +0800</pubDate>
       
-      <guid>http://xianyuLuo.com/archives/</guid>
+      <guid>http://xianyuluo.com/archives/</guid>
       <description> ttt </description>
     </item>
     
