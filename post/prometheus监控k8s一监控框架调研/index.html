@@ -150,10 +150,15 @@
 
 <h1 id="kubernetes集群监控架构">Kubernetes集群监控架构</h1>
 
-<p>在具体讨论Prometheus监控架构之前，再来看几个实际的问题
-1. 如果有多个Kubernetes集群，怎么做？
-2. 多个Kubernetes集群的监控数据怎么处理？
-3. 告警应该怎么集中并去重？</p>
+<p>在具体讨论Prometheus监控架构之前，再来看几个实际的问题</p>
+
+<ol>
+<li><p>如果有多个Kubernetes集群，怎么做？</p></li>
+
+<li><p>多个Kubernetes集群的监控数据怎么处理？</p></li>
+
+<li><p>告警应该怎么集中并去重？</p></li>
+</ol>
 
 <p>好在这些问题对Prometheus来说都不是难事，最终，我们采取 Prometheus + kube-state-metrics + Alertmanager + Grafana 架构来做Kubernetes集群监控。监控系统具体架构如下</p>
 
