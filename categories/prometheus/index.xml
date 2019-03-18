@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Prometheus on xianyuLuo Blog</title>
+    <link>http://xianyuluo.com/categories/prometheus/</link>
+    <description>Recent content in Prometheus on xianyuLuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn-ZH</language>
+    <lastBuildDate>Mon, 18 Mar 2019 15:51:18 +0800</lastBuildDate>
+    
+	<atom:link href="http://xianyuluo.com/categories/prometheus/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Prometheus监控k8s(二)——监控部署</title>
+      <link>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%BA%8C%E7%9B%91%E6%8E%A7%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Mon, 18 Mar 2019 15:51:18 +0800</pubDate>
+      
+      <guid>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%BA%8C%E7%9B%91%E6%8E%A7%E9%83%A8%E7%BD%B2/</guid>
+      <description>背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&amp;hellip;&amp;hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
+此文章是Prometheus监控系列的第二篇，基于上一篇讲解了怎么对Kubernetes集群实施Prometheus监控。
+Prometheus部署 在k8s上部署Prometheus十分简单，下面给的例子中将Prometheus部署到prometheus命名空间。
+部署——监控数据采集 Prometheus 将kube-state-metrics和prometheus分开部署，先部署prometheus。
+prometheus-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1 kind: ClusterRole metadata: name: prometheus rules: - apiGroups: [&amp;quot;&amp;quot;] resources: - nodes - nodes/proxy - services - endpoints - pods verbs: [&amp;quot;get&amp;quot;, &amp;quot;list&amp;quot;, &amp;quot;watch&amp;quot;] - apiGroups: - extensions resources: - ingresses verbs: [&amp;quot;get&amp;quot;, &amp;quot;list&amp;quot;, &amp;quot;watch&amp;quot;] - nonResourceURLs: [&amp;quot;/metrics&amp;quot;] verbs: [&amp;quot;get&amp;quot;] --- apiVersion: v1 kind: ServiceAccount metadata: name: prometheus namespace: prometheus --- apiVersion: rbac.</description>
+    </item>
+    
+    <item>
+      <title>Prometheus监控k8s(一)——监控框架调研</title>
+      <link>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%80%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94/</link>
+      <pubDate>Tue, 12 Mar 2019 22:11:13 +0800</pubDate>
+      
+      <guid>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%80%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94/</guid>
+      <description>背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&amp;hellip;&amp;hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
+此文章是Prometheus监控系列的第一篇，目的也很明确，旨在于寻找一套能够胜任kubernetes集群监控的架构。
+k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB + Grafana [x] 3、Promethus + kube-state-metrics + Grafana
+ Grafana: 开源DashBoard，后端支持多种数据库，如：Influxdb、Prometheus&amp;hellip;，插件也比较多，功能强大。非常适合用于做展示。
+ InfluxDB: 开源时间序列数据库，性能高效
+ cAdvisor: 来自 Google 的容器监控工具，也是 Kubelet 内置的容器资源收集工具。它会自动收集本机容器 CPU、内存、网络和文件系统的资源占用情况，并对外提供 cAdvisor 原生的 API。随 kubelet 启动 &amp;ndash;cadvisor-port = 1</description>
+    </item>
+    
+  </channel>
+</rss>
