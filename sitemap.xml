@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%BA%8C%E7%9B%91%E6%8E%A7%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2019-03-18T15:51:18+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%80%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94/</loc>
     <lastmod>2019-03-12T22:11:13+08:00</lastmod>
   </url>
@@ -149,7 +154,7 @@
   
   <url>
     <loc>http://xianyuluo.com/tags/kubernetes/</loc>
-    <lastmod>2019-03-12T22:11:13+08:00</lastmod>
+    <lastmod>2019-03-18T15:51:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -161,13 +166,13 @@
   
   <url>
     <loc>http://xianyuluo.com/post/</loc>
-    <lastmod>2019-03-12T22:11:13+08:00</lastmod>
+    <lastmod>2019-03-18T15:51:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://xianyuluo.com/tags/prometheus/</loc>
-    <lastmod>2019-03-12T22:11:13+08:00</lastmod>
+    <lastmod>2019-03-18T15:51:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -203,7 +208,7 @@
   
   <url>
     <loc>http://xianyuluo.com/</loc>
-    <lastmod>2019-03-12T22:11:13+08:00</lastmod>
+    <lastmod>2019-03-18T15:51:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
