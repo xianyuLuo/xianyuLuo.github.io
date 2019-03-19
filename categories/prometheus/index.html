@@ -7,27 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>TTL | xianyuLuo Blog</title>
-    <meta property="og:title" content="TTL - xianyuLuo Blog">
+    <title>Prometheus | xianyuLuo Blog</title>
+    <meta property="og:title" content="Prometheus - xianyuLuo Blog">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2016-11-22T23:32:39&#43;08:00">
-        
-        
-    <meta property="article:modified_time" content="2016-11-22T23:32:39&#43;08:00">
         
     <meta name="Keywords" content="python,运维,Kubernetes,Istio,ServiceMesh,xianyuLuo,博客,python,软件架构,公众号">
-    <meta name="description" content="TTL">
+    <meta name="description" content="Prometheus">
         
     <meta name="author" content="xianyuLuo">
-    <meta property="og:url" content="http://xianyuluo.com/post/ttl/">
+    <meta property="og:url" content="http://xianyuluo.com/categories/prometheus/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
     
-        <link rel="stylesheet" href="/css/prism.css">
-    
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml+xml" href="http://xianyuluo.com/categories/prometheus/index.xml" title="xianyuLuo Blog" />
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     
@@ -36,6 +31,7 @@
     
     
 </head>
+
 
 <body>
 <header id="header" class="clearfix">
@@ -51,7 +47,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="http://xianyuluo.com">首页</a>
+                    <a class="" href="http://xianyuluo.com">首页</a>
                     
                     <a  href="http://xianyuluo.com/archives/" title="归档">归档</a>
                     
@@ -70,109 +66,84 @@
 
             <div class="col-8" id="main">
                 <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">TTL</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2016年11月22日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="http://xianyuluo.com/categories/%E7%BD%91%E7%BB%9C">网络</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            
-
-<h4 id="什么是ttl">什么是TTL？</h4>
-
-<pre><code>就是用来记录IP数据包从发出经过了多少路由！
-TTL占8bit，所以它的最大值就是255；每当数据包经过一个路由器时，TTL的值就会减1，当为0时，就把这个数据包给丢弃。较老的系统的TTL初始化值为15或32，现在一般的为255。
-</code></pre>
-
-<h4 id="为什么需要ttl">为什么需要TTL？</h4>
-
-<pre><code>为了防止IP数据包在选路时无休止的在网络中流动。
-</code></pre>
-
-<hr />
-
-<!-- more -->
-
-<p><strong>Traceroute成功利用了TTL</strong>
-*Traceroute*：路由探测工具，用它可以知道从源地址到目的地址需要经过哪些路由器
-*使用方法*：Traceroute 域名 / IP，你使用的时候可能会看到很多的 &lsquo;*&lsquo;，这是正常的，因为国内的网络环境有很多都是隐蔽的。
-*原理*：</p>
-
-<pre><code>我们现在可以猜想一下Traceroute程序的操作过程。它发送一份TTL字段为1的IP数据报给目的主机。处理这份数据报的第一个路由器将TTL值减1，丢弃该数据报，并发回一份超时ICMP报文。这样就得到了该路径中的第一个路由器的地址。然后Traceroute程序发送一份TTL值为2的数据报，这样我们就可以得到第二个路由器的地址。继续这个过程直至该数据报到达目的主机。但是目的主机哪怕接收到TTL值为1的IP数据报，也不会丢弃该数据报并产生一份超时ICMP报文，这是因为数据报已经到达其最终目的地。
-</code></pre>
-
-<p>*那么我们该如何判断是否已经到达目的主机了呢*？</p>
-
-<pre><code>Traceroute程序发送一份UDP数据报给目的主机，但它选择一个不可能的值作为UDP端口号（大于30000），使目的主机的任何一个应用程序都不可能使用该端口。因为，当该数据报到达时，将使目的主机的UDP模块产生一份“端口不可达”错误的ICMP报文。这样，Traceroute程序所要做的就是区分接收到的ICMP报文是超时还是端口不可达，以判断什么时候结束。
-</code></pre>
-
-<p>看到这儿，是不是觉得Traceroute有点老奸巨猾呢？没错，就是的！</p>
-
-<p><font color=#ff1201>技术交流可加QQ群：<strong>774332965</strong><br></font></p>
-
-<p><font color=#ff1201>微信订阅号同步：<strong>时下IT</strong></font></p>
-
-                        </div>
-
-                        
-
-
-                        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/arp%E5%8D%8F%E8%AE%AE/">arp协议</a></li>
-        
-        <li><a href="/post/dns%E8%A7%A3%E6%9E%90/">DNS解析</a></li>
-        
-        <li><a href="/post/cache-buffer/">cache和buffer的区别</a></li>
-        
-    </ul>
-</div>
-
-
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="http://xianyuluo.com/tags/tcp">TCP</a></li>
-                                
-                                <li><a href="http://xianyuluo.com/tags/ip">IP</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
                     
-    
+                    <h3 class="archive-title">
+                        分类
+                        <span class="keyword">prometheus</span>
+                        中的文章
+                    </h3>
+                    
 
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "xianyuLuo/utterances"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
-    
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%BA%8C%E7%9B%91%E6%8E%A7%E9%83%A8%E7%BD%B2/">Prometheus监控k8s(二)——监控部署</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月18日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="http://xianyuluo.com/categories/kubernetes">kubernetes</a>
+                                
+                                    <a href="http://xianyuluo.com/categories/prometheus">prometheus</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&hellip;&hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
+此文章是Prometheus监控系列的第二篇，基于上一篇讲解了怎么对Kubernetes集群实施Prometheus监控。
+Prometheus部署 在k8s上部署Prometheus十分简单，下面给的例子中将Prometheus部署到prometheus命名空间。
+部署——监控数据采集 Prometheus 将kube-state-metrics和prometheus分开部署，先部署prometheus。
+prometheus-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1 kind: ClusterRole metadata: name: prometheus rules: - apiGroups: [&quot;&quot;] resources: - nodes - nodes/proxy - services - endpoints - pods verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;] - apiGroups: - extensions resources: - ingresses verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;] - nonResourceURLs: [&quot;/metrics&quot;] verbs: [&quot;get&quot;] --- apiVersion: v1 kind: ServiceAccount metadata: name: prometheus namespace: prometheus --- apiVersion: rbac.……
+                                <p class="readmore"><a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%BA%8C%E7%9B%91%E6%8E%A7%E9%83%A8%E7%BD%B2/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%80%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94/">Prometheus监控k8s(一)——监控框架调研</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月12日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="http://xianyuluo.com/categories/kubernetes">kubernetes</a>
+                                
+                                    <a href="http://xianyuluo.com/categories/prometheus">prometheus</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&hellip;&hellip;等等服务，已达到随时掌握Kubernetes集群的内部状况。
+此文章是Prometheus监控系列的第一篇，目的也很明确，旨在于寻找一套能够胜任kubernetes集群监控的架构。
+k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB + Grafana [x] 3、Promethus + kube-state-metrics + Grafana
+ Grafana: 开源DashBoard，后端支持多种数据库，如：Influxdb、Prometheus&hellip;，插件也比较多，功能强大。非常适合用于做展示。
+ InfluxDB: 开源时间序列数据库，性能高效
+ cAdvisor: 来自 Google 的容器监控工具，也是 Kubelet 内置的容器资源收集工具。它会自动收集本机容器 CPU、内存、网络和文件系统的资源占用情况，并对外提供 cAdvisor 原生的 API。随 kubelet 启动 &ndash;cadvisor-port = 1……
+                                <p class="readmore"><a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%80%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+
+                    
+
+
+
+
                 </div>
             </div>
+
             <div id="secondary">
     <section class="widget">
         <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
@@ -318,24 +289,9 @@ TTL占8bit，所以它的最大值就是255；每当数据包经过一个路由�
 </footer>
 
 
-    <script type="text/javascript">
-    
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
-
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
 
 
 
