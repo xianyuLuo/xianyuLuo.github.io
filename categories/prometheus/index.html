@@ -78,6 +78,36 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%89%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E9%87%87%E9%9B%86/">Prometheus监控k8s(三)——业务指标采集</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月26日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="http://xianyuluo.com/categories/kubernetes">kubernetes</a>
+                                
+                                    <a href="http://xianyuluo.com/categories/prometheus">prometheus</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubbernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&hellip;&hellip;等等服务，以达到随时掌握Kubernetes集群的内部状况。
+此文章也是Prometheus监控系列的第三篇，具体描述了在Kubernetes中使用Prometheus来采集业务指标。多数为思想指导，会列出两个列子。第一个例子是针对部署在Kubernetes中的服务，另外一个例子是非Kubernetes部署的服务。前者为使用“动态采集”，后者使用“静态采集”。
+概念 要使用Prometheus实现自动采集业务指标数据真的非常简单，只需要2步
+1、业务侧实现一个接口，返Prometheus规范化数据，如下：
+traefik_entrypoint_requests_total{code=&quot;302&quot;,entrypoint=&quot;https&quot;,method=&quot;HEAD&quot;,protocol=&quot;http&quot;} 1 traefik_entrypoint_requests_total{code=&quot;302&quot;,entrypoint=&quot;https&quot;,method=&quot;POST&quot;,protocol=&quot;http&quot;} 1 traefik_entrypoint_requests_total{code=&quot;304&quot;,entrypoint=&quot;http&quot;,method=&quot;GET&quot;,protocol=&quot;http&quot;} 15 traefik_entrypoint_requests_total{code=&quot;304&quot;,entrypoint=&quot;https&quot;,method=&quot;GET&quot;,protocol=&quot;http&quot;} 5951 traefik_entrypoint_requests_total{code=&quot;400&quot;,entrypoint=&quot;https&quot;,method=&quot;GET&quot;,protocol=&quot;http&quot;} 149 traefik_entrypoint_requests_total{code=&quot;403&quot;,entrypoint=&quot;http&quot;,method=&quot;GET&quot;,protocol=&quot;http&quot;} 2 traefik_entrypoint_requests_total{code=&quot;403&quot;,entrypoint=&quot;https&quot;,method=&quot;HEAD&quot;,protocol=&quot;http&quot;} 2 traefik_entrypoint_requests_total{code=&quot;404&quot;,entrypoint=&quot;http&quot;,method=&quot;GET&quot;,protocol=&quot;http&quot;} 680 traefik_entrypoint_requests_total{code=&quot;404&quot;,entrypoint=&quot;http&quot;,method=&quot;HEAD&quot;,protocol=&quot;http&quot;} 15 traefik_entrypoint_requests_total{code=&quot;404&quot;,entrypoint=&quot;http&quot;,method=&quot;POST&quot;,protocol=&quot;http&quot;} 674   每行代表一个监控项，以KEY VALUE形式返回，KEY可以带上0个或多个属性，多个属性以 “，”分隔。在Prometheus中查询数据的时候，可以用这些属性作为筛选条件。  2、运维侧部署的时候，在svc上带上3个标签
+apiVersion: v1 kind: Service metadata: name: xxx-svc namespace: xxx-qa annotations: prometheus.……
+                                <p class="readmore"><a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%89%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E9%87%87%E9%9B%86/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%BA%8C%E7%9B%91%E6%8E%A7%E9%83%A8%E7%BD%B2/">Prometheus监控k8s(二)——监控部署</a>
                                 </h1>
                             </header>
@@ -159,6 +189,10 @@ k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB 
 <ul class="widget-list">
     
     <li>
+        <a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%89%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E9%87%87%E9%9B%86/" title="Prometheus监控k8s(三)——业务指标采集">Prometheus监控k8s(三)——业务指标采集</a>
+    </li>
+    
+    <li>
         <a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%BA%8C%E7%9B%91%E6%8E%A7%E9%83%A8%E7%BD%B2/" title="Prometheus监控k8s(二)——监控部署">Prometheus监控k8s(二)——监控部署</a>
     </li>
     
@@ -194,10 +228,6 @@ k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB 
         <a href="http://xianyuluo.com/post/tcp%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E5%92%8C%E5%9D%97%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" title="tcp交互数据和块数据处理">tcp交互数据和块数据处理</a>
     </li>
     
-    <li>
-        <a href="http://xianyuluo.com/post/tcp%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2/" title="tcp连接的建立与终止">tcp连接的建立与终止</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -208,11 +238,11 @@ k8s监控方案调研 1、cAdvisor + InfluxDB + Grafana 2、Heapster + InfluxDB 
 <ul class="widget-list">
     
     <li>
-        <a href="http://xianyuluo.com/categories/kubernetes/">kubernetes(5)</a>
+        <a href="http://xianyuluo.com/categories/kubernetes/">kubernetes(6)</a>
     </li>
     
     <li>
-        <a href="http://xianyuluo.com/categories/prometheus/">prometheus(2)</a>
+        <a href="http://xianyuluo.com/categories/prometheus/">prometheus(3)</a>
     </li>
     
     <li>
