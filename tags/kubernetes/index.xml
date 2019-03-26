@@ -6,10 +6,24 @@
     <description>Recent content in Kubernetes on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
-    <lastBuildDate>Mon, 18 Mar 2019 15:51:18 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Mar 2019 09:42:15 +0800</lastBuildDate>
     
 	<atom:link href="http://xianyuluo.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Prometheus监控k8s(三)——业务指标采集</title>
+      <link>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%89%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E9%87%87%E9%9B%86/</link>
+      <pubDate>Tue, 26 Mar 2019 09:42:15 +0800</pubDate>
+      
+      <guid>http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%89%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E9%87%87%E9%9B%86/</guid>
+      <description>背景 由于容器化和微服务的大力发展，Kubernetes基本已经统一了容器管理方案，当我们使用Kubernetes来进行容器化管理的时候，全面监控Kubbernetes也就成了我们第一个需要探索的问题。我们需要监控kubernetes的ingress、service、deployment、pod&amp;hellip;&amp;hellip;等等服务，以达到随时掌握Kubernetes集群的内部状况。
+此文章也是Prometheus监控系列的第三篇，具体描述了在Kubernetes中使用Prometheus来采集业务指标。多数为思想指导，会列出两个列子。第一个例子是针对部署在Kubernetes中的服务，另外一个例子是非Kubernetes部署的服务。前者为使用“动态采集”，后者使用“静态采集”。
+概念 要使用Prometheus实现自动采集业务指标数据真的非常简单，只需要2步
+1、业务侧实现一个接口，返Prometheus规范化数据，如下：
+traefik_entrypoint_requests_total{code=&amp;quot;302&amp;quot;,entrypoint=&amp;quot;https&amp;quot;,method=&amp;quot;HEAD&amp;quot;,protocol=&amp;quot;http&amp;quot;} 1 traefik_entrypoint_requests_total{code=&amp;quot;302&amp;quot;,entrypoint=&amp;quot;https&amp;quot;,method=&amp;quot;POST&amp;quot;,protocol=&amp;quot;http&amp;quot;} 1 traefik_entrypoint_requests_total{code=&amp;quot;304&amp;quot;,entrypoint=&amp;quot;http&amp;quot;,method=&amp;quot;GET&amp;quot;,protocol=&amp;quot;http&amp;quot;} 15 traefik_entrypoint_requests_total{code=&amp;quot;304&amp;quot;,entrypoint=&amp;quot;https&amp;quot;,method=&amp;quot;GET&amp;quot;,protocol=&amp;quot;http&amp;quot;} 5951 traefik_entrypoint_requests_total{code=&amp;quot;400&amp;quot;,entrypoint=&amp;quot;https&amp;quot;,method=&amp;quot;GET&amp;quot;,protocol=&amp;quot;http&amp;quot;} 149 traefik_entrypoint_requests_total{code=&amp;quot;403&amp;quot;,entrypoint=&amp;quot;http&amp;quot;,method=&amp;quot;GET&amp;quot;,protocol=&amp;quot;http&amp;quot;} 2 traefik_entrypoint_requests_total{code=&amp;quot;403&amp;quot;,entrypoint=&amp;quot;https&amp;quot;,method=&amp;quot;HEAD&amp;quot;,protocol=&amp;quot;http&amp;quot;} 2 traefik_entrypoint_requests_total{code=&amp;quot;404&amp;quot;,entrypoint=&amp;quot;http&amp;quot;,method=&amp;quot;GET&amp;quot;,protocol=&amp;quot;http&amp;quot;} 680 traefik_entrypoint_requests_total{code=&amp;quot;404&amp;quot;,entrypoint=&amp;quot;http&amp;quot;,method=&amp;quot;HEAD&amp;quot;,protocol=&amp;quot;http&amp;quot;} 15 traefik_entrypoint_requests_total{code=&amp;quot;404&amp;quot;,entrypoint=&amp;quot;http&amp;quot;,method=&amp;quot;POST&amp;quot;,protocol=&amp;quot;http&amp;quot;} 674   每行代表一个监控项，以KEY VALUE形式返回，KEY可以带上0个或多个属性，多个属性以 “，”分隔。在Prometheus中查询数据的时候，可以用这些属性作为筛选条件。  2、运维侧部署的时候，在svc上带上3个标签
+apiVersion: v1 kind: Service metadata: name: xxx-svc namespace: xxx-qa annotations: prometheus.</description>
+    </item>
     
     <item>
       <title>Prometheus监控k8s(二)——监控部署</title>
