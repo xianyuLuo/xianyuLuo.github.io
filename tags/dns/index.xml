@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dns on xianyuLuo Blog</title>
+    <link>http://xianyuluo.com/tags/dns/</link>
+    <description>Recent content in Dns on xianyuLuo Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>cn-ZH</language>
+    <lastBuildDate>Sun, 20 Nov 2016 23:16:07 +0800</lastBuildDate>
+    
+	<atom:link href="http://xianyuluo.com/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DNS解析</title>
+      <link>http://xianyuluo.com/post/dns%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 20 Nov 2016 23:16:07 +0800</pubDate>
+      
+      <guid>http://xianyuluo.com/post/dns%E8%A7%A3%E6%9E%90/</guid>
+      <description>什么是DNS解析？ 就是把域名转换为IP地址的一个过程  为什么需要DNS解析？ 以前都是靠 /etc/hosts 文件来解析域名的，每解析一个域名就需要在文件里面添加一条对应记录。后来由于互联网的迅速发展，域名已经数不胜数了。如果这个时候还是一条一条记录的写在/etc/hosts 文件里面的话，那这个文件估计就超级大了。于是就有了DNS解析，由DNS服务器来解析域名。  DNS域名解析过程有两种方法：递归解析、迭代解析
+递归解析： 递归解析就相当于你把这件事情交给第三个人去做，不管他怎么做，反正最后把域名对应的IP地址交给你就是了。而这第三个人就是DNS服务器，这也是我们生活中用的比较多的一种方法。一般用的就是电信的 114.114.114.114  迭代解析： 迭代解析就是你自己去找。 全球的根域名服务器一共有13台，你自己去一级一级的找下去，最终找到自己想解析的域名。  例子： 解析 www.</description>
+    </item>
+    
+  </channel>
+</rss>
