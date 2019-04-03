@@ -6,10 +6,22 @@
     <description>Recent content in Sre on xianyuLuo Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn-ZH</language>
-    <lastBuildDate>Sun, 10 Mar 2019 12:11:03 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Apr 2019 23:11:29 +0800</lastBuildDate>
     
 	<atom:link href="http://xianyuluo.com/tags/sre/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sre总结</title>
+      <link>http://xianyuluo.com/post/sre-read/</link>
+      <pubDate>Wed, 03 Apr 2019 23:11:29 +0800</pubDate>
+      
+      <guid>http://xianyuluo.com/post/sre-read/</guid>
+      <description>Google SRE读后感 《SRE Google运维解密》一书由Google SRE团队各成员所写的短文组成，书中记载了SRE团队在支持Google业务规模不断扩大的过程中所总结的经验以及实际案例。即使在IT行业发生翻天覆地变化的今天，此书仍然弥足珍贵，它详细记录了Google迈过分水岭时期的全过程。很显然，这些经历没有办法完全复制，也许只能被模仿，但是却可以启发读者，指引未来。
+本书分为以下4部分： 1. 概述——了解SRE的定义，以及该职位与传统IT行业运维职位的不同 2. 指导思想——详细讨论SRE的工作模式、行事方式，以及日常运维工作中关注的焦点 3. 具体实践——理解SRE日常工作背后的理念，讨论具体的构建与运维大型分布式系统的实践 4. 管理——探索Google在培训、内部沟通，以及会议方面的最佳实践
+一、概述 什么是SRE？在Google没有“运维”这个职位，只有SRE团队（Site Reliability Engineering）。SRE团队主要由两部分人组成，一部分是全职开发人员，另外一部分人需要掌握两方面的技能，95%的开发技能和5%的运维思想、技能；同时所有人都必须非常愿意、也非常相信用软件工程方法可以解决复杂的运维问题。这样组成的团队具有以下特点：对于重复性、手动性的操作有天然的排斥感；有足够的技术能力快速开发出软件系统以替代手工操作。
+二、指导思想 DevOps还是SRE？</description>
+    </item>
     
     <item>
       <title>SRE附录C~事故状态文档示范</title>

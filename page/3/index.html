@@ -68,6 +68,31 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="http://xianyuluo.com/post/ttl/" title="TTL" >TTL</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2016年11月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://xianyuluo.com/categories/%E7%BD%91%E7%BB%9C">网络</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                什么是TTL？ 就是用来记录IP数据包从发出经过了多少路由！ TTL占8bit，所以它的最大值就是255；每当数据包经过一个路由器时，TTL的值就会减1，当为0时，就把这个数据包给丢弃。较老的系统的TTL初始化值为15或32，现在一般的为255。  为什么需要TTL？ 为了防止IP数据包在选路时无休止的在网络中流动。  Traceroute成功利用了TTL *Traceroute*：路由探测工具，用它可以知道从源地址到目的地址需要经过哪些路由器 *使用方法*：Traceroute 域名 / IP，你使用的时候可能会看到很多的 &lsquo;*&lsquo;，这是正常的，因为国内的网络环境有很多都是隐蔽的。 *原理*：
+我们现在可以猜想一下Traceroute程序的操作过程。它发送一份TTL字段为1的IP数据报给目的主机。处理这份数据报的第一个路由器将TTL值减1，丢弃该数据报，并发回一份超时ICMP报文。这样就得到了该路径中的第一个路由器的地址。然后Traceroute程序发送一份TTL值为2的数据报，这样我们就可以得到第二个路由器的地址。继续这个过程直至该数据报到达目的主机。但是目的主机哪怕接收到TTL值为1的IP数据报，也不会丢弃该数据报并产生一份超时ICMP报文，这是因为数据报已经到达其最终目的地。  *那么我们该如何判断是否已经到达目的主机了呢*？
+Traceroute程序发送一份UDP数据报给目的主机，但它选择一个不可能的值作为UDP端口号（大于30000），使目的主机的任何一个应用程序都不可能使用该端口。因为，当该数据报到达时，将使目的主机的UDP模块产生一份“端口不可达”错误的ICMP报文。这样，Traceroute程序所要做的就是区分接收到的ICMP报文是超时还是端口不可达，以判断什么时候结束。  看到这儿，是不是觉得Traceroute有点老奸巨猾呢？没错，就是的！……
+                            </div>
+                            <p class="readmore"><a href="http://xianyuluo.com/post/ttl/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="http://xianyuluo.com/post/arp%E5%8D%8F%E8%AE%AE/" title="arp协议" >arp协议</a>
                                 </h1>
                             </header>
@@ -192,6 +217,10 @@ Buffer：主要是用于解决速度不同的设备之间的传输问题。一�
 <ul class="widget-list">
     
     <li>
+        <a href="http://xianyuluo.com/post/sre-read/" title="Sre总结">Sre总结</a>
+    </li>
+    
+    <li>
         <a href="http://xianyuluo.com/post/prometheus%E7%9B%91%E6%8E%A7k8s%E4%B8%89%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E9%87%87%E9%9B%86/" title="Prometheus监控k8s(三)——业务指标采集">Prometheus监控k8s(三)——业务指标采集</a>
     </li>
     
@@ -227,10 +256,6 @@ Buffer：主要是用于解决速度不同的设备之间的传输问题。一�
         <a href="http://xianyuluo.com/post/traefik%E5%9C%A8kubernetes%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" title="traefik在kubernetes中的应用">traefik在kubernetes中的应用</a>
     </li>
     
-    <li>
-        <a href="http://xianyuluo.com/post/tcp%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%E5%92%8C%E5%9D%97%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" title="tcp交互数据和块数据处理">tcp交互数据和块数据处理</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -239,6 +264,10 @@ Buffer：主要是用于解决速度不同的设备之间的传输问题。一�
     <section class="widget">
         <h3 class="widget-title">分类</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="http://xianyuluo.com/categories/book/">book(1)</a>
+    </li>
     
     <li>
         <a href="http://xianyuluo.com/categories/kubernetes/">kubernetes(6)</a>
@@ -270,6 +299,8 @@ Buffer：主要是用于解决速度不同的设备之间的传输问题。一�
     <a href="http://xianyuluo.com/tags/about/">about</a>
     
     <a href="http://xianyuluo.com/tags/archives/">archives</a>
+    
+    <a href="http://xianyuluo.com/tags/book/">book</a>
     
     <a href="http://xianyuluo.com/tags/cow/">cow</a>
     
